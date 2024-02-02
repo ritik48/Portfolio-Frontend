@@ -1,0 +1,251 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;700&family=PT+Serif&family=Young+Serif&display=swap");
+
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-color: rgb(17, 17, 17);
+    --primary-color: rgb(137, 133, 16);
+    font-size: 62.5%;
+}
+
+body {
+    background-color: rgb(10, 10, 10);
+    font-family: "Montserrat";
+}
+
+li {
+    list-style: none;
+}
+
+.highlight {
+    font-weight: 600;
+    color: var(--primary-color)
+}
+
+.btn {
+    border: none;
+    font-size: 1.8rem;
+    padding: 0.7em 0.6em;
+
+    font-weight: 400;
+    font-family: "Montserrat";
+    color: rgb(211, 211, 211);
+
+    border-radius: 0.25em;
+
+    cursor: pointer;
+    transition: 0.15s all ease-in;
+}
+
+.btn.primary {
+    background-color: var(--primary-color);
+}
+
+.btn.secondary {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px);
+  opacity: 0.8;
+}
+
+.btn.secondary:hover {
+  transform: translateY(-2px);
+  opacity: 0.8;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-inline: 20px;
+}
+
+/* ================ Nav ============== */
+
+svg {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  
+  width: 100%;
+  height: 120%; 
+}
+
+nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-block: 4rem;
+
+    max-width: 1000px;
+    width: 100%;
+}
+
+nav .container {
+  display: flex;
+  align-items: center;
+  
+  max-width: unset;
+  max-width: 1000%;
+}
+
+nav .logo {
+  font-size: 2.5rem;
+  font-weight: 600;
+
+  color: var(--primary-color)
+}
+
+nav ul {
+    display: flex;
+    border: 0.001px solid rgba(128, 128, 128, 0.263);
+    
+    width: fit-content;
+    margin: 0 auto;
+
+    font-size: 1.5rem;
+    gap: 4rem;
+
+    padding-block: 1em;
+    padding-inline: 3em;
+    color: rgb(232, 231, 231);
+
+    border-radius: 10px;
+
+    background-color: rgba(36, 35, 35, 0.724);
+}
+
+ul li {
+    cursor: pointer;
+    transition: 0.15s ease-in-out;
+}
+
+ul li:hover {
+    color: grey;
+}
+
+/* ================= hero ================= */
+
+.hero .container {
+    height: 100vh;
+    /* border: 2px solid red; */
+
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.hero_content {
+    height: max-content;
+    margin-top: 150px;
+
+    padding: 5rem 10rem;
+
+    border-left: 0.5px solid grey;
+    border-bottom-left-radius: 20px;
+    width: 100%;
+
+    font-size: 2.5rem;
+    position: relative;
+}
+
+.hero_content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+
+    width: 90px;
+    height: 100px;
+    background-color: rgb(200, 255, 127);
+
+    filter: blur(90px);
+}
+.hero_left {
+    display: flex;
+    flex-direction: column;
+    gap: 2.3rem;
+}
+
+.greet {
+    font-size: 1.2em;
+    color: rgb(156, 153, 153);
+    font-weight: bold;
+}
+
+.name {
+    font-size: 3.6em;
+    font-weight: bold;
+    /* padding-inline: 0.2em; */
+    border-radius: 10px;
+
+    background: radial-gradient(
+        circle at 10% 20%,
+        rgb(253, 239, 132) 0%,
+        rgb(247, 198, 169) 54.2%,
+        rgb(21, 186, 196) 100.3%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero_bottom {
+    margin-top: 10px;
+    display: flex;
+    gap: 1rem;
+}
+
+.hero_top {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+.hero_img {
+    width: 300px;
+}
+
+.hero_content p {
+    font-size: 1em;
+    color: rgb(210, 206, 206);
+    line-height: 1.5em;
+}
+
+
+@media screen and (max-width: 690px) {
+  :root {
+    font-size: 50%;
+  }
+  nav .logo {
+    font-size: 2rem;
+  }
+  nav ul {
+    padding-inline: 8px;
+    margin-inline: 0;
+  }
+  nav .container{
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+  }
+
+  .hero_content {
+    margin-top: 130px;
+    font-size: 2rem;
+    padding-inline: 5rem;
+    /* border: 1px solid red; */
+  }
+  .hero_top {
+    flex-direction: column;
+  }
+}
