@@ -2,10 +2,11 @@ function NavBar() {
     return (
         <>
             <svg
+                className="svg1"
                 xmlns="http://www.w3.org/2000/svg"
                 version="1.1"
-                // xmlns:xlink="http://www.w3.org/1999/xlink"
-                // xmlns:svgjs="http://svgjs.dev/svgjs"
+                // xmlnsXlink="http://www.w3.org/1999/xlink"
+                // xmlnsSvgjs="http://svgjs.dev/svgjs"
                 viewBox="0 0 1422 800"
             >
                 <defs>
@@ -142,7 +143,7 @@ function NavBar() {
                         {"< "}Ritik {"/>"}
                     </div>
                     <ul>
-                        <li>Projects</li>
+                        <li className="active">Projects</li>
                         <li>Blogs</li>
                         <li>About</li>
                     </ul>
@@ -169,13 +170,111 @@ function HeroSection() {
                             🍵tea.
                         </p>
                         <div className="hero_bottom">
-                            <button className="btn primary">Download CV</button>
                             <button className="btn secondary">
-                                Contact Me
+                                Download CV
                             </button>
+                            {/* <button className="btn secondary">
+                                Contact Me
+                            </button> */}
                         </div>
                     </div>
                     {/* <img src="/img.jpg" className="hero_img" /> */}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function Skills() {
+    return (
+        <section className="skills">
+            {/* <div className="container"> */}
+            <div className="skills_content">
+                <div className="skills_left">
+                    <h2>Skills </h2>
+                    <p className="section_summary">
+                        Languages, frameworks and tools that I know and have
+                        created projects with.
+                    </p>
+                </div>
+                <div className="skills_right">
+                    <div className="skills_list">
+                        <span className="skill">HTML</span>
+                        <span className="skill">CSS</span>
+                        <span className="skill">Javascript</span>
+                        <span className="skill">React</span>
+                        <span className="skill">NodeJs</span>
+                        <span className="skill">MongoDb</span>
+                        <span className="skill">ExpressJS</span>
+                        <span className="skill">Python</span>
+                    </div>
+                </div>
+                {/* </div> */}
+            </div>
+        </section>
+    );
+}
+
+function Projects() {
+    return (
+        <section className="projects">
+            <div className="container">
+                <div className="projects_content">
+                    <h2>Projects</h2>
+                    <div className="project_list">
+                        <div className="project">
+                            <div className="project_img">
+                                <img src="/images/linkify.png" alt="" />
+                            </div>
+                            <div className="project_detail">
+                                <div className="project_title">
+                                    Linkify Text
+                                </div>
+                                <a href="https://linkifytext.onrender.com" target="_blank" rel="noreferrer">
+                                    <img src="/images/link.svg" alt="" />
+                                </a>
+                                <a href="https://github.com/ritik48/linkifytext">
+                                    <img src="/images/github.svg" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                        <div className="project">
+                            <div className="project_img">
+                                <img src="/images/movie.png" alt="" />
+                            </div>
+                            <div className="project_detail">
+                                <div className="project_title">MoviePedia</div>
+
+                                <a href="https://moviepedia-tech.vercel.app/" target="_blank" rel="noreferrer">
+                                    <img src="/images/link.svg" alt="" />
+                                </a>
+                                <a href="https://github.com/ritik48/MoviePedia">
+                                    <img src="/images/github.svg" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                        <div className="project">
+                            <div className="project_img">
+                                <img src="/images/yelp.png" alt="" />
+                            </div>
+                            <div className="project_detail">
+                                <div className="project_title">YelpCamp</div>
+
+                                <img src="/images/link.svg" alt="" />
+                                <img src="/images/github.svg" alt="" />
+                            </div>
+                        </div>
+                       
+                        {/* <div className="project">
+                            <div className="project_img"></div>
+                            <div className="project_title"></div>
+                        </div>
+                        <div className="project">
+                            <div className="project_img"></div>
+                            <div className="project_title"></div>
+                        </div> */}
+                    </div>
+                    <button className="btn primary">All Projects</button>
                 </div>
             </div>
         </section>
@@ -187,6 +286,8 @@ function App() {
         <>
             <NavBar />
             <HeroSection />
+            <Skills />
+            <Projects />
         </>
     );
 }
