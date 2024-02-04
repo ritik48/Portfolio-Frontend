@@ -1,4 +1,33 @@
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { LocomotiveScrollProvider, useLocomotiveScroll} from 'react-locomotive-scroll';
+
+import gsap from "gsap";
+
+import { useRef, useState, useLayoutEffect } from "react";
+
 function NavBar() {
+    const { scrollY } = useScroll();
+    const [hidden, setHidden] = useState(false);
+
+    const [showLogo, setShowLogo] = useState(true);
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const previous = scrollY.getPrevious();
+        console.log(latest, ",", previous);
+
+        if (latest > 20) {
+            setShowLogo(false);
+        } else {
+            setShowLogo(true);
+        }
+
+        if (latest > previous && latest > 20) {
+            setHidden(true);
+        } else {
+            setHidden(false);
+        }
+    });
+
     return (
         <>
             <svg
@@ -137,31 +166,64 @@ function NavBar() {
                     ></path>
                 </g>
             </svg>
-            <nav>
+            <motion.nav
+                initial="initial"
+                variants={{
+                    initial: {
+                        x: "-50%",
+                    },
+                    visible: { y: 0 },
+                    hidden: { y: "-140%" },
+                }}
+                animate={hidden ? "hidden" : "visible"}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+            >
                 <div className="container">
-                    <div className="logo">
-                        {"< "}Ritik {"/>"}
-                    </div>
+                    {showLogo && (
+                        <div className="logo">
+                            {"< "}Ritik {"/>"}
+                        </div>
+                    )}
                     <ul>
                         <li className="active">Projects</li>
                         <li>Blogs</li>
                         <li>About</li>
                     </ul>
                 </div>
-            </nav>
+            </motion.nav>
         </>
     );
 }
 
 function HeroSection() {
+    const comp = useRef(null);
+
+    useLayoutEffect(() => {
+        let ctx = gsap.context(() => {
+            const t1 = gsap.timeline();
+            t1.from(["#greet", "#name"], {
+                opacity: 0,
+                y: "+=30",
+                stagger: 0.5,
+            });
+        }, comp);
+
+        return () => ctx.revert();
+    }, []);
+
+
     return (
-        <section className="hero">
+        <section className="hero" ref={comp}>
             <div className="container">
                 <div className="hero_content">
                     <div className="hero_left">
                         <div className="hero_top">
-                            <span className="greet">Hello, I'm</span>
-                            <span className="name">Ritik Raj</span>
+                            <span className="greet" id="greet">
+                                Hello, I'm
+                            </span>
+                            <span className="name" id="name">
+                                Ritik Raj
+                            </span>
                         </div>
                         <p>
                             CSE undergrad and a{" "}
@@ -197,19 +259,75 @@ function Skills() {
                         created projects with.
                     </p>
                 </div>
+
                 <div className="skills_right">
                     <div className="skills_list">
-                        <span className="skill">HTML</span>
-                        <span className="skill">CSS</span>
-                        <span className="skill">Javascript</span>
-                        <span className="skill">React</span>
-                        <span className="skill">NodeJs</span>
-                        <span className="skill">MongoDb</span>
-                        <span className="skill">ExpressJS</span>
-                        <span className="skill">Python</span>
+                        <div className="skill">
+                            <img
+                                src="/icons/html.png"
+                                alt=""
+                                className="skill_icon"
+                            />
+                            <span>HTML</span>
+                        </div>
+                        <div className="skill">
+                            <img
+                                src="/icons/css.png"
+                                alt=""
+                                className="skill_icon"
+                            />
+                            <span>CSS</span>
+                        </div>
+                        <div className="skill">
+                            <img
+                                src="/icons/js.png"
+                                alt=""
+                                className="skill_icon"
+                            />
+                            <span>Javascript</span>
+                        </div>
+                        <div className="skill">
+                            <img
+                                src="/icons/react.png"
+                                alt=""
+                                className="skill_icon"
+                            />
+                            <span>React</span>
+                        </div>
+                        <div className="skill">
+                            <img
+                                src="/icons/nodejs.png"
+                                alt=""
+                                className="skill_icon"
+                            />
+                            <span>NodeJs</span>
+                        </div>
+                        <div className="skill">
+                            <img
+                                src="/icons/mongodb.png"
+                                alt=""
+                                className="skill_icon"
+                            />
+                            <span>MongoDb</span>
+                        </div>
+                        <div className="skill">
+                            <img
+                                src="/icons/react.png"
+                                alt=""
+                                className="skill_icon"
+                            />
+                            <span>ExpressJS</span>
+                        </div>
+                        <div className="skill">
+                            <img
+                                src="/icons/python.png"
+                                alt=""
+                                className="skill_icon"
+                            />
+                            <span>Python</span>
+                        </div>
                     </div>
                 </div>
-                {/* </div> */}
             </div>
         </section>
     );
@@ -230,10 +348,18 @@ function Projects() {
                                 <div className="project_title">
                                     Linkify Text
                                 </div>
-                                <a href="https://linkifytext.onrender.com" target="_blank" rel="noreferrer">
+                                <a
+                                    href="https://linkifytext.onrender.com"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
                                     <img src="/images/link.svg" alt="" />
                                 </a>
-                                <a href="https://github.com/ritik48/linkifytext">
+                                <a
+                                    href="https://github.com/ritik48/linkifytext"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
                                     <img src="/images/github.svg" alt="" />
                                 </a>
                             </div>
@@ -245,10 +371,18 @@ function Projects() {
                             <div className="project_detail">
                                 <div className="project_title">MoviePedia</div>
 
-                                <a href="https://moviepedia-tech.vercel.app/" target="_blank" rel="noreferrer">
+                                <a
+                                    href="https://moviepedia-tech.vercel.app/"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
                                     <img src="/images/link.svg" alt="" />
                                 </a>
-                                <a href="https://github.com/ritik48/MoviePedia">
+                                <a
+                                    href="https://github.com/ritik48/MoviePedia"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
                                     <img src="/images/github.svg" alt="" />
                                 </a>
                             </div>
@@ -260,11 +394,23 @@ function Projects() {
                             <div className="project_detail">
                                 <div className="project_title">YelpCamp</div>
 
-                                <img src="/images/link.svg" alt="" />
-                                <img src="/images/github.svg" alt="" />
+                                <a
+                                    href="https://yelpcampbyritik.onrender.com/campgrounds"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <img src="/images/link.svg" alt="" />
+                                </a>
+                                <a
+                                    href="https://github.com/ritik48/YelpCamp/"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <img src="/images/github.svg" alt="" />
+                                </a>
                             </div>
                         </div>
-                       
+
                         {/* <div className="project">
                             <div className="project_img"></div>
                             <div className="project_title"></div>
@@ -281,13 +427,52 @@ function Projects() {
     );
 }
 
+function Blogs() {
+    return (
+        <section className="blogs">
+            <div className="container">
+                <h2>Latest Blog</h2>
+
+                <div className="blogs_content">
+                    <div className="blog_left">
+                        <h3 className="blog_title">
+                            Controlled Elements in React
+                        </h3>
+                        <span className="blog_date">25th December, 2023</span>
+                        <div className="blog_tags">
+                            <span>react</span>
+                            <span>useState</span>
+                            <span>hooks</span>
+                        </div>
+                        <div className="blog_read">
+                            <button className="btn primary">
+                                Read{" "}
+                                <img
+                                    src="/images/link_black.svg"
+                                    alt=""
+                                    className="icon"
+                                />
+                            </button>
+                        </div>
+                    </div>
+                    <div className="blog_right">
+                        <img src="/images/blog.webp" alt="" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
 function App() {
+    
     return (
         <>
             <NavBar />
             <HeroSection />
             <Skills />
             <Projects />
+            <Blogs />
         </>
     );
 }

@@ -24,7 +24,8 @@ li {
 }
 
 h2 {
-    font-size: 4rem;
+    font-size: 6rem;
+    text-align: center;
     font-weight: 600;
     color: rgb(223, 223, 223);
 }
@@ -55,6 +56,8 @@ h2 {
 
 .btn.secondary {
     background-color: transparent;
+
+    border-radius: 25px;
     border: 1px solid var(--primary-color);
 }
 
@@ -77,10 +80,12 @@ h2 {
 }
 
 nav {
-    position: absolute;
+    z-index: 2;
+    position: fixed;
     left: 50%;
-    transform: translateX(-50%);
-    margin-block: 4rem;
+    /* transform: translateX(-50%); */
+    margin-block: 2rem;
+    /* border: 1px solid red; */
 
     max-width: 1000px;
     width: 100%;
@@ -118,11 +123,11 @@ nav ul {
 
     border-radius: 10px;
 
-    background-color: rgba(36, 35, 35, 0.724);
+    background-color: rgba(35, 35, 35, 0.932);
 }
 
 .active {
-    background-color: rgb(77, 76, 76);
+    background-color: rgb(0, 0, 0);
     padding: 0.5rem 0.9rem;
     border-radius: 0.5rem;
 }
@@ -227,7 +232,8 @@ ul li {
 /* =================== skills =================== */
 
 .skills {
-    margin-bottom: 50px;
+    margin-top: -30px;
+    margin-bottom: 0px;
 }
 
 .skills .container {
@@ -236,7 +242,11 @@ ul li {
 
 .skills_content {
     display: flex;
-    gap: 5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 0rem;
 }
 
 .skills_left {
@@ -246,12 +256,14 @@ ul li {
     gap: 40px;
 
     border-top: 1px solid rgb(108, 99, 99);
-    border-bottom: 1px solid rgb(108, 99, 99);
+    /* border-bottom: 1px solid rgb(108, 99, 99); */
     border-right: 1px solid rgb(108, 99, 99);
     background-color: rgba(19, 19, 19, 0.463);
 
+    /* background-color: rgb(56, 45, 66); */
+
     border-radius: 20px;
-    padding: 10rem 10rem;
+    padding: 8rem 10rem;
 
     width: 45%;
 
@@ -280,12 +292,12 @@ ul li {
 }
 
 .skills_right {
-    width: 35%;
-    padding: 10rem 2rem;
+    width: 50%;
+    padding: 6rem 2rem;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
 
     position: relative;
 }
@@ -298,11 +310,24 @@ ul li {
 
 .skills_list {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 1.8rem;
+
+    gap: 2rem;
+}
+
+.skill_icon,
+.icon {
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .skill {
+    display: flex;
+    align-items: center;
+
+    gap: 2rem;
     font-size: 2.4rem;
     padding: 0.3em 0.6em;
     border-radius: 0.2em;
@@ -325,7 +350,7 @@ ul li {
 } */
 
 .projects {
-    margin-top: 150px;
+    margin-top: 50px;
     background: url("../public/images/bg.svg") no-repeat center center fixed;
     background-size: cover;
     margin-bottom: 50px;
@@ -394,6 +419,104 @@ img {
     width: 2.5rem;
 }
 
+/* ================= Blogs ================ */
+
+.blogs {
+    /* margin-top: 100px; */
+    margin-bottom: 100px;
+
+    /* border-top: 0.5px solid rgb(71, 70, 70); */
+    /* border-radius: 25px; */
+
+    /* background: url("../public/images/bg2.svg") no-repeat center center fixed;
+    background-size: cover; */
+
+    padding: 110px 5px;
+}
+
+.blogs .container {
+    position: relative;
+    border-left: 1px solid grey;
+}
+
+.blogs .container::before {
+    content: url("../public/images/test1.svg");
+    position: absolute;
+    top: -20%;
+    left: -5%px;
+
+    width: 20%;
+    opacity: 0.5;
+}
+
+.blogs_content {
+    margin-top: 50px;
+    display: flex;
+    gap: 5.5rem;
+}
+
+.blog_left {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.blog_right img {
+    box-shadow: 0 0 8px grey;
+}
+
+.blog_title {
+    font-size: 2.5rem;
+    color: rgb(221, 221, 221);
+    font-weight: 500;
+}
+
+.blog_date {
+    color: grey;
+    font-size: 1.5rem;
+}
+
+.blog_tags {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    padding: 3.8rem 0 0 0;
+    position: relative;
+}
+
+.blog_tags::before {
+    content: "Topic:";
+    position: absolute;
+
+    color: white;
+    top: 0;
+    left: 0;
+    font-size: 2rem;
+}
+
+.blog_tags span {
+    font-size: 1.4rem;
+    color: white;
+    border: 0.5px solid grey;
+
+    background-color: rgb(21, 21, 21);
+
+    padding: 0.7em 0.9em;
+    border-radius: 0.8em;
+}
+
+.blogs button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    color: black;
+    padding-inline: 1em;
+}
+
 @media screen and (max-width: 690px) {
     :root {
         font-size: 50%;
@@ -436,12 +559,34 @@ img {
     .projects {
         margin-top: 15px;
     }
+
+    .blogs {
+        margin-top: 70px;
+    }
+    .blog_right {
+        order: 0 !important;
+    }
+    .blog_left {
+        order: 1 !important;
+        width: 100%;
+    }
+
+    .blogs_content {
+        flex-direction: column;
+        gap: 2rem;
+    }
 }
 
 @media screen and (max-width: 500px) {
     .project_img {
         width: 320px;
         height: 200px;
+    }
+    .blogs .container::before {
+        top: -25%;
+        left: 1%;
+
+        opacity: 0.4;
     }
 }
 
