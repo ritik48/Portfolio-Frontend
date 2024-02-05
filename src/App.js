@@ -180,13 +180,13 @@ function NavBar() {
                 <div className="container">
                     {showLogo && (
                         <div className="logo">
-                            {"< "}Ritik {"/>"}
+                            {"< "} R {"/>"}
                         </div>
                     )}
                     <ul>
                         <li className="active">Projects</li>
                         <li>Blogs</li>
-                        <li>About</li>
+                        <li>Contact</li>
                     </ul>
                 </div>
             </motion.nav>
@@ -468,7 +468,7 @@ function Socials() {
     return (
         <section className="socials">
             <div className="container">
-                <h2> Find me here 🖐️</h2>
+            <h2><span className="highlight2">Have a project in mind ? </span> Let's talk.</h2>
                 {/* <img src="/icons/t1.svg" className="test" alt="" /> */}
                 <img src="/icons/t2.svg" className="svg_float" alt="" />
                 <img src="/icons/t3.svg" className="svg_float" alt="" />

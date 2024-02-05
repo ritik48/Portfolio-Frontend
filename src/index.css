@@ -535,9 +535,7 @@ img {
     color: black;
     padding-inline: 1em;
 }
-.more_blogs {
-    margin-top: 25px;
-}
+
 
 /* =================== Socials =============== */
 section {
@@ -552,8 +550,6 @@ section {
     border-top: 0.5px solid grey;
     background-image:  url("../public/images/bg.svg"), linear-gradient(to bottom,#1d1e1e, var(--background-color));
     border-radius: 50px;
-
-    
         /* margin-top: 50px; */
         /* background:  no-repeat center center fixed; */
         background-size: cover;
@@ -597,22 +593,21 @@ section {
 }
 
 .socials h2 {
-    /* color: rgb(244, 199, 95); */
+    margin-bottom: 70px;
 }
 
 .social_container {
     display: flex;
     align-items: center;
 
-    gap: 12%;
+    gap: 6%;
     justify-content: center;
-    margin-top: 80px;
 
     position: relative;
 }
 
 .social_container div {
-    width: 15%;
+    width: 10%;
     max-width: 180px;
 }
 
@@ -622,6 +617,11 @@ section {
     padding: 2rem;
     border-radius: 1.8em;
     box-shadow: 0 0 5px rgb(126, 125, 125);
+}
+
+.highlight2 {
+    font-size: 3.2rem;
+    color: rgb(164, 164, 52);
 }
 
 @media screen and (max-width: 690px) {
@@ -682,6 +682,9 @@ section {
         flex-direction: column;
         gap: 2rem;
     }
+    .more_blogs {
+        margin-top: 25px;
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -712,6 +715,9 @@ section {
     }
     .svg_float {
         opacity: 0.2 !important;
+    }
+    .highlight2 {
+        font-size: 3rem !important;
     }
 }
 
@@ -753,4 +759,5 @@ section {
         transform: translateY(-2px);
         opacity: 0.8;
     }
+    
 }
