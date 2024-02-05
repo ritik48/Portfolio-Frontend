@@ -9,7 +9,7 @@
 }
 
 :root {
-    --background-color: rgb(17, 17, 17);
+    --background-color: rgb(10, 10, 10);
     --primary-color: rgb(223, 209, 107);
     font-size: 62.5%;
 }
@@ -56,7 +56,7 @@ h2 {
 
 .btn.secondary {
     background-color: transparent;
-
+    color: rgb(218, 214, 214);
     border-radius: 25px;
     border: 1px solid var(--primary-color);
 }
@@ -221,6 +221,9 @@ ul li {
 }
 .hero_img {
     width: 300px;
+}
+section {
+    /* border: 1px solid red; */
 }
 
 .hero_content p {
@@ -423,7 +426,7 @@ img {
 
 .blogs {
     /* margin-top: 100px; */
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
 
     /* border-top: 0.5px solid rgb(71, 70, 70); */
     /* border-radius: 25px; */
@@ -431,8 +434,9 @@ img {
     /* background: url("../public/images/bg2.svg") no-repeat center center fixed;
     background-size: cover; */
 
-    padding: 110px 5px;
+    padding: 100px 5px;
 }
+
 
 .blogs .container {
     position: relative;
@@ -446,13 +450,26 @@ img {
     left: -5%px;
 
     width: 20%;
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 .blogs_content {
     margin-top: 50px;
     display: flex;
     gap: 5.5rem;
+}
+
+.blogs_content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 5%;
+
+    width:100px;
+    height: 100px;
+    background-color: rgb(200, 255, 127);
+
+    filter: blur(100px);
 }
 
 .blog_left {
@@ -513,8 +530,98 @@ img {
     align-items: center;
     gap: 0.5rem;
 
+    border-color: rgb(95, 90, 54) !important;
+
     color: black;
     padding-inline: 1em;
+}
+.more_blogs {
+    margin-top: 25px;
+}
+
+/* =================== Socials =============== */
+section {
+    /* border: 1px solid red; */
+}
+
+.socials {
+    margin-bottom: 100px;
+    padding: 100px 5px;
+    /* background-color: #1d1e1e8f; */
+
+    border-top: 0.5px solid grey;
+    background-image:  url("../public/images/bg.svg"), linear-gradient(to bottom,#1d1e1e, var(--background-color));
+    border-radius: 50px;
+
+    
+        /* margin-top: 50px; */
+        /* background:  no-repeat center center fixed; */
+        background-size: cover;
+        background-position: center;
+        /* margin-bottom: 50px; */
+  
+
+    position: relative;
+    
+}
+
+.socials .container::before {
+    content: url("../public/icons/t1.svg");
+    position: absolute;
+    top: -8%;
+    left: 18%;
+    
+    transform: rotate(-70deg);
+    
+    opacity: 0.4;
+    width: 20%;
+}
+
+
+.socials .container .svg_float:nth-of-type(1) {
+    bottom: 1%;
+    right: 2%;
+    opacity: 0.4;
+}
+
+.socials .container .svg_float:nth-of-type(2) {
+    bottom: -15%;
+    left: 2%;
+    opacity: 0.4;
+}
+
+.svg_float {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+
+.socials h2 {
+    /* color: rgb(244, 199, 95); */
+}
+
+.social_container {
+    display: flex;
+    align-items: center;
+
+    gap: 12%;
+    justify-content: center;
+    margin-top: 80px;
+
+    position: relative;
+}
+
+.social_container div {
+    width: 15%;
+    max-width: 180px;
+}
+
+.social_icon {
+    display: block;
+
+    padding: 2rem;
+    border-radius: 1.8em;
+    box-shadow: 0 0 5px rgb(126, 125, 125);
 }
 
 @media screen and (max-width: 690px) {
@@ -587,6 +694,24 @@ img {
         left: 1%;
 
         opacity: 0.4;
+    }
+    .social_container div {
+        width: 20%;
+        
+    }
+    .socials .container::before {
+        content: url("../public/icons/t1.svg");
+        position: absolute;
+        top: 5%;
+        left: 2%;
+        
+        transform: rotate(-60deg);
+        
+        opacity: 0.2;
+        width: 16%;
+    }
+    .svg_float {
+        opacity: 0.2 !important;
     }
 }
 

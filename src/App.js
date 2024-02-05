@@ -1,5 +1,4 @@
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { LocomotiveScrollProvider, useLocomotiveScroll} from 'react-locomotive-scroll';
 
 import gsap from "gsap";
 
@@ -445,10 +444,10 @@ function Blogs() {
                             <span>hooks</span>
                         </div>
                         <div className="blog_read">
-                            <button className="btn primary">
+                            <button className="btn secondary">
                                 Read{" "}
                                 <img
-                                    src="/images/link_black.svg"
+                                    src="/images/link.svg"
                                     alt=""
                                     className="icon"
                                 />
@@ -459,9 +458,34 @@ function Blogs() {
                         <img src="/images/blog.webp" alt="" />
                     </div>
                 </div>
+                <button className="btn primary more_blogs">More Blogs</button>
             </div>
         </section>
     );
+}
+
+function Socials() {
+    return (
+        <section className="socials">
+            <div className="container">
+                <h2> Find me here 🖐️</h2>
+                {/* <img src="/icons/t1.svg" className="test" alt="" /> */}
+                <img src="/icons/t2.svg" className="svg_float" alt="" />
+                <img src="/icons/t3.svg" className="svg_float" alt="" />
+                <div className="social_container">
+                    <div>
+                        <img className="social_icon" src="/icons/linkedin.png" alt=""/>
+                    </div>
+                    <div>
+                        <img className="social_icon" src="/icons/gmail.png" alt=""/>
+                    </div>
+                    <div>
+                        <img className="social_icon" src="/icons/github.svg" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
 }
 
 function App() {
@@ -473,6 +497,7 @@ function App() {
             <Skills />
             <Projects />
             <Blogs />
+            <Socials />
         </>
     );
 }
