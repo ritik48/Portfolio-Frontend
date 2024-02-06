@@ -344,9 +344,12 @@ function Skills() {
 
 function Projects() {
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
+        setError(false);
         setLoading(true);
         async function fetchProjects() {
             try {
@@ -358,10 +361,10 @@ function Projects() {
                     return alert("Error fetching projects");
                 }
                 const data = await res.json();
-                
+
                 setProjects(data);
             } catch (error) {
-                alert("Error occurred");
+                setError("Unable to fetch projects");
             } finally {
                 setLoading(false);
             }
@@ -375,10 +378,11 @@ function Projects() {
                 <div className="projects_content">
                     <h2>Projects</h2>
                     <div className="project_list">
+                        {error && <p className="info error">{error}</p>}
                         {loading && (
                             <p className="info">Fetching projects...</p>
                         )}
-                        {!loading && projects.length < 1 && (
+                        {!loading && !error && projects.length < 1 && (
                             <p className="info">Currently no projects.</p>
                         )}
 
