@@ -39,6 +39,10 @@ h2 {
     margin: 0 auto;
 }
 
+.info.error {
+    color: rgb(255, 158, 22);
+}
+
 .highlight {
     font-weight: 600;
     color: rgb(229, 188, 39);
