@@ -2,9 +2,9 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 import gsap from "gsap";
 
-import { useRef, useState, useLayoutEffect } from "react";
+import { useRef, useState, useLayoutEffect, useEffect } from "react";
 
-const BACKEND = "http://127.0.0.1:3001";
+const BACKEND = "http://192.168.1.10:3001";
 
 function NavBar() {
     const { scrollY } = useScroll();
@@ -14,7 +14,6 @@ function NavBar() {
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious();
-        console.log(latest, ",", previous);
 
         if (latest > 20) {
             setShowLogo(false);
@@ -213,7 +212,7 @@ function HeroSection() {
     }, []);
 
     async function downloadResume() {
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         a.setAttribute("href", `${BACKEND}/resume`);
         a.click();
         a.remove();
@@ -344,82 +343,82 @@ function Skills() {
 }
 
 function Projects() {
+    const [loading, setLoading] = useState(false);
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        setLoading(true);
+        async function fetchProjects() {
+            try {
+                const res = await fetch(`${BACKEND}`, {
+                    method: "GET",
+                });
+
+                if (!res.ok) {
+                    return alert("Error fetching projects");
+                }
+                const data = await res.json();
+                
+                setProjects(data);
+            } catch (error) {
+                alert("Error occurred");
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchProjects();
+    }, []);
+
     return (
         <section className="projects">
             <div className="container">
                 <div className="projects_content">
                     <h2>Projects</h2>
                     <div className="project_list">
-                        <div className="project">
-                            <div className="project_img">
-                                <img src="/images/linkify.png" alt="" />
-                            </div>
-                            <div className="project_detail">
-                                <div className="project_title">
-                                    Linkify Text
+                        {loading && (
+                            <p className="info">Fetching projects...</p>
+                        )}
+                        {!loading && projects.length < 1 && (
+                            <p className="info">Currently no projects.</p>
+                        )}
+
+                        {projects.map((project) => {
+                            return (
+                                <div className="project" key={project}>
+                                    <div className="project_img">
+                                        <img
+                                            src={`${BACKEND}${project.image}`}
+                                            alt=""
+                                        />
+                                    </div>
+                                    <div className="project_detail">
+                                        <div className="project_title">
+                                            {project.title}
+                                        </div>
+                                        <a
+                                            href={project.live}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            <img
+                                                src="/images/link.svg"
+                                                alt=""
+                                            />
+                                        </a>
+                                        <a
+                                            href={project.github}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            <img
+                                                src="/images/github.svg"
+                                                alt=""
+                                            />
+                                        </a>
+                                    </div>
                                 </div>
-                                <a
-                                    href="https://linkifytext.onrender.com"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    <img src="/images/link.svg" alt="" />
-                                </a>
-                                <a
-                                    href="https://github.com/ritik48/linkifytext"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    <img src="/images/github.svg" alt="" />
-                                </a>
-                            </div>
-                        </div>
-                        <div className="project">
-                            <div className="project_img">
-                                <img src="/images/movie.png" alt="" />
-                            </div>
-                            <div className="project_detail">
-                                <div className="project_title">MoviePedia</div>
-
-                                <a
-                                    href="https://moviepedia-tech.vercel.app/"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    <img src="/images/link.svg" alt="" />
-                                </a>
-                                <a
-                                    href="https://github.com/ritik48/MoviePedia"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    <img src="/images/github.svg" alt="" />
-                                </a>
-                            </div>
-                        </div>
-                        <div className="project">
-                            <div className="project_img">
-                                <img src="/images/yelp.png" alt="" />
-                            </div>
-                            <div className="project_detail">
-                                <div className="project_title">YelpCamp</div>
-
-                                <a
-                                    href="https://yelpcampbyritik.onrender.com/campgrounds"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    <img src="/images/link.svg" alt="" />
-                                </a>
-                                <a
-                                    href="https://github.com/ritik48/YelpCamp/"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    <img src="/images/github.svg" alt="" />
-                                </a>
-                            </div>
-                        </div>
+                            );
+                        })}
 
                         {/* <div className="project">
                             <div className="project_img"></div>
