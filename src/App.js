@@ -1,13 +1,12 @@
-
 import gsap from "gsap";
 
 import { useRef, useState, useLayoutEffect, useEffect } from "react";
 
 import NavBar from "./components/NavBar";
+import Project from "./components/Project";
 
 const BACKEND = "http://192.168.1.7:3001";
 // const BACKEND = "http://127.0.0.1:3001";
-
 
 function HeroSection() {
     const comp = useRef(null);
@@ -156,7 +155,7 @@ function Skills() {
     );
 }
 
-function Projects() {
+function ProjectList() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -202,41 +201,13 @@ function Projects() {
                         )}
 
                         {projects.map((project) => {
-                            return (
-                                <div className="project" key={project}>
-                                    <div className="project_img">
-                                        <img
-                                            src={`${BACKEND}${project.image}`}
-                                            alt=""
-                                        />
-                                    </div>
-                                    <div className="project_detail">
-                                        <div className="project_title">
-                                            {project.title}
-                                        </div>
-                                        <a
-                                            href={project.live}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
-                                            <img
-                                                src="/images/link.svg"
-                                                alt=""
-                                            />
-                                        </a>
-                                        <a
-                                            href={project.github}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
-                                            <img
-                                                src="/images/github.svg"
-                                                alt=""
-                                            />
-                                        </a>
-                                    </div>
-                                </div>
-                            );
+                            return <Project
+                                title={project.title}
+                                github={project.github}
+                                live={project.live}
+                                image={`${BACKEND}${project.image}`}
+                                key={project.live}
+                            />;
                         })}
                     </div>
                     {!error && !loading && projects && (
@@ -419,7 +390,7 @@ function App() {
             <NavBar />
             <HeroSection />
             <Skills />
-            <Projects />
+            <ProjectList />
             <Blogs />
             <Socials />
         </>
