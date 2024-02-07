@@ -5,6 +5,7 @@ import { useRef, useState, useLayoutEffect, useEffect } from "react";
 import NavBar from "./components/NavBar";
 import Project from "./components/Project";
 import Blog from "./components/Blog";
+import Socials from "./components/Socials";
 
 const BACKEND = "http://192.168.1.7:3001";
 // const BACKEND = "http://127.0.0.1:3001";
@@ -280,47 +281,6 @@ function LatestBlog() {
                         More Blogs
                     </button>
                 )}
-            </div>
-        </section>
-    );
-}
-
-function Socials() {
-    return (
-        <section className="socials">
-            <div className="container">
-                <h2>
-                    <span className="highlight2">
-                        Have a project in mind ?{" "}
-                    </span>{" "}
-                    Let's talk.
-                </h2>
-                {/* <img src="/icons/t1.svg" className="test" alt="" /> */}
-                <img src="/icons/t2.svg" className="svg_float" alt="" />
-                <img src="/icons/t3.svg" className="svg_float" alt="" />
-                <div className="social_container">
-                    <div>
-                        <img
-                            className="social_icon"
-                            src="/icons/linkedin.png"
-                            alt=""
-                        />
-                    </div>
-                    <div>
-                        <img
-                            className="social_icon"
-                            src="/icons/gmail.png"
-                            alt=""
-                        />
-                    </div>
-                    <div>
-                        <img
-                            className="social_icon"
-                            src="/icons/github.svg"
-                            alt=""
-                        />
-                    </div>
-                </div>
             </div>
         </section>
     );
