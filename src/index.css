@@ -23,6 +23,10 @@ li {
     list-style: none;
 }
 
+a {
+    text-decoration: none;
+}
+
 h2 {
     font-size: 6rem;
     text-align: center;
@@ -235,9 +239,7 @@ ul li {
 .hero_img {
     width: 300px;
 }
-section {
-    /* border: 1px solid red; */
-}
+
 
 .hero_content p {
     font-size: 1em;
@@ -249,7 +251,8 @@ section {
 
 .skills {
     margin-top: -30px;
-    margin-bottom: 0px;
+    /* margin-bottom: 0px; */
+    padding-bottom: 6rem;
 }
 
 .skills .container {
@@ -262,7 +265,7 @@ section {
     justify-content: center;
     align-items: center;
 
-    gap: 0rem;
+    gap: 6rem;
 }
 
 .skills_left {
@@ -309,7 +312,7 @@ section {
 
 .skills_right {
     width: 50%;
-    padding: 6rem 2rem;
+    /* padding: 6rem 2rem; */
 
     display: flex;
     /* justify-content: center;
@@ -366,10 +369,11 @@ section {
 } */
 
 .projects {
-    margin-top: 50px;
+    /* margin-top: 50px; */
+    padding-block: 6rem;
     background: url("../public/images/bg.svg") no-repeat center center fixed;
     background-size: cover;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
 }
 
 .projects_content {
@@ -447,7 +451,8 @@ img {
     /* background: url("../public/images/bg2.svg") no-repeat center center fixed;
     background-size: cover; */
 
-    padding: 100px 5px;
+    /* padding: 100px 5px; */
+    padding-block: 10rem;
 }
 
 
@@ -486,14 +491,19 @@ img {
 }
 
 .blog_left {
-    width: 60%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
 }
 
+.blogs_right {
+    width: 50%;
+}
+
 .blog_right img {
+    max-width: 550px;
     box-shadow: 0 0 8px grey;
 }
 
@@ -537,8 +547,13 @@ img {
     padding: 0.7em 0.9em;
     border-radius: 0.8em;
 }
+.blogs .btn.secondary {
+    display: flex;
+    gap: 0.8rem;
+}
 
-.blogs button {
+
+.blogs .btn.btn.primary {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -546,7 +561,8 @@ img {
     border-color: rgb(95, 90, 54) !important;
 
     color: black;
-    padding-inline: 1em;
+    
+    margin-top: 20px;
 }
 
 
@@ -556,8 +572,9 @@ section {
 }
 
 .socials {
-    margin-bottom: 100px;
-    padding: 100px 5px;
+    
+    /* margin-bottom: 100px; */
+    padding: 10rem 3rem;
     /* background-color: #1d1e1e8f; */
 
     border-top: 0.5px solid grey;
@@ -594,7 +611,7 @@ section {
 }
 
 .socials .container .svg_float:nth-of-type(2) {
-    bottom: -15%;
+    bottom: -10%;
     left: 2%;
     opacity: 0.4;
 }
@@ -658,13 +675,14 @@ section {
         margin-top: 130px;
         font-size: 2rem;
         padding-inline: 5rem;
-        /* border: 1px solid red; */
+
     }
     .hero_top {
         flex-direction: column;
     }
     .skills {
         margin-top: -80px;
+        padding-bottom: 1rem;
     }
     .skills_content {
         flex-direction: column;
@@ -677,11 +695,11 @@ section {
     }
 
     .projects {
-        margin-top: 15px;
+        padding-top: 5rem;
     }
 
     .blogs {
-        margin-top: 70px;
+        padding-top: 120px;
     }
     .blog_right {
         order: 0 !important;
