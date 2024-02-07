@@ -4,6 +4,7 @@ import { useRef, useState, useLayoutEffect, useEffect } from "react";
 
 import NavBar from "./components/NavBar";
 import Project from "./components/Project";
+import Blog from "./components/Blog";
 
 const BACKEND = "http://192.168.1.7:3001";
 // const BACKEND = "http://127.0.0.1:3001";
@@ -201,13 +202,15 @@ function ProjectList() {
                         )}
 
                         {projects.map((project) => {
-                            return <Project
-                                title={project.title}
-                                github={project.github}
-                                live={project.live}
-                                image={`${BACKEND}${project.image}`}
-                                key={project.live}
-                            />;
+                            return (
+                                <Project
+                                    title={project.title}
+                                    github={project.github}
+                                    live={project.live}
+                                    image={`${BACKEND}${project.image}`}
+                                    key={project.live}
+                                />
+                            );
                         })}
                     </div>
                     {!error && !loading && projects && (
@@ -219,7 +222,7 @@ function ProjectList() {
     );
 }
 
-function Blogs() {
+function LatestBlog() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -250,42 +253,6 @@ function Blogs() {
         fetchBlogs();
     }, []);
 
-    function getFormattedDate(date) {
-        // Assuming your JSON data is loaded into a variable called jsonData
-        const createdAt = date;
-
-        // Parse the ISO 8601 formatted date string
-        const parsedDate = new Date(createdAt);
-
-        // Function to get the suffix for the day (e.g., 'st', 'nd', 'rd', 'th')
-        function getDaySuffix(day) {
-            if (day >= 11 && day <= 13) {
-                return "th";
-            }
-            switch (day % 10) {
-                case 1:
-                    return "st";
-                case 2:
-                    return "nd";
-                case 3:
-                    return "rd";
-                default:
-                    return "th";
-            }
-        }
-
-        // Format the date as "14th Jan, 2024"
-        const formattedDate = `${parsedDate.getDate()}${getDaySuffix(
-            parsedDate.getDate()
-        )} ${parsedDate.toLocaleString("default", {
-            month: "short",
-        })}, ${parsedDate.getFullYear()}`;
-
-        return formattedDate;
-    }
-
-    const publishedDate = blogs ? getFormattedDate(blogs.createdAt) : "";
-
     return (
         <section className="blogs">
             <div className="container">
@@ -299,38 +266,13 @@ function Blogs() {
                     )}
 
                     {!loading && !error && blogs && (
-                        <>
-                            <div className="blog_left">
-                                <h3 className="blog_title">{blogs.title}</h3>
-                                <span className="blog_date">
-                                    {publishedDate}
-                                </span>
-                                <div className="blog_tags">
-                                    {blogs.tags &&
-                                        blogs.tags.map((tag, index) => (
-                                            <span key={index}>{tag}</span>
-                                        ))}
-                                </div>
-                                <div className="blog_read">
-                                    <a
-                                        href={blogs.link}
-                                        className="btn secondary"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        Read{" "}
-                                        <img
-                                            src="/images/link.svg"
-                                            alt=""
-                                            className="icon"
-                                        />
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="blog_right">
-                                <img src={blogs.image} alt="" />
-                            </div>
-                        </>
+                        <Blog
+                            title={blogs.title}
+                            image={blogs.image}
+                            link={blogs.link}
+                            createdAt={blogs.createdAt}
+                            tags={blogs.tags}
+                        />
                     )}
                 </div>
                 {!error && !loading && blogs && (
@@ -391,7 +333,7 @@ function App() {
             <HeroSection />
             <Skills />
             <ProjectList />
-            <Blogs />
+            <LatestBlog />
             <Socials />
         </>
     );
