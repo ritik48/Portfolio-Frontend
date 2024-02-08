@@ -7,6 +7,20 @@
     background-position: center;
 }
 
+.heading {
+    padding: 30px;
+
+    border-radius: 20px;
+    background-color: rgb(112, 85, 21);
+
+    background: linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5) ), url("../../public/images/project_bg.jpg");
+    background-position: center;
+    background-size: cover;
+
+    
+    box-shadow: 0 0 5px rgb(109, 109, 109);
+}
+
 .blogs_section .container {
     position: relative;
     border-left: 1px solid grey !important;

@@ -104,7 +104,7 @@ function BlogList() {
     return (
         <section className={styles.blogs_section}>
             <div className="container">
-                {/* <h2>Blogs</h2> */}
+                <h2 className={styles.heading}>Blogs</h2>
 
                 {error && <p className="info error">{error}</p>}
                 {loading && <p className="info">Fetching Blogs...</p>}

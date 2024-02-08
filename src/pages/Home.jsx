@@ -1,6 +1,7 @@
 import gsap from "gsap";
 
 import { useRef, useState, useLayoutEffect, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import Project from "../components/Project";
 import Blog from "../components/Blog";
@@ -351,7 +352,9 @@ function ProjectList() {
                         })}
                     </div>
                     {!error && !loading && projects && (
-                        <button className="btn primary">All Projects</button>
+                        <Link className="btn primary" to={"/projects"} onClick={() => window.scrollTo(0, 0)}>
+                            More Projects
+                        </Link>
                     )}
                 </div>
             </div>
@@ -413,9 +416,9 @@ function LatestBlog() {
                     )}
                 </div>
                 {!error && !loading && blogs && (
-                    <button className="btn primary more_blogs">
+                    <Link className="btn primary more_blogs" to={"/blogs"} onClick={() => window.scrollTo(0, 0)}>
                         More Blogs
-                    </button>
+                    </Link>
                 )}
             </div>
         </section>

@@ -279,7 +279,7 @@ ul li {
 
     border-top: 1px solid rgb(108, 99, 99);
     /* border-bottom: 1px solid rgb(108, 99, 99); */
-    border-right: 1px solid rgb(108, 99, 99);
+    /* border-right: 1px solid rgb(108, 99, 99); */
     background-color: rgba(19, 19, 19, 0.463);
 
     /* background-color: rgb(56, 45, 66); */
@@ -566,6 +566,7 @@ img {
     color: black;
     
     margin-top: 20px;
+    width: max-content;
 }
 
 

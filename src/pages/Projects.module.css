@@ -18,12 +18,15 @@
     display: flex;
     flex-direction: column;
 
+    
     gap: 3rem;
 
     justify-content: center;
     align-items: center;
     /* width: max-content; */
     margin: 0 auto;
+
+    margin-top: -60px;
 }
 
 .project_controls input {
@@ -58,6 +61,21 @@ input:focus-within {
     width: 80%;
 
     gap: 1.5rem;
+}
+
+.project_top h2 {
+    padding: 30px;
+
+    border-radius: 20px;
+    background-color: rgb(112, 85, 21);
+
+    background: linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5) ), url("../../public/images/project_bg2.jpg");
+    background-position: center;
+    background-size: cover;
+
+    
+    box-shadow: 0 0 5px rgb(109, 109, 109);
+    /* background-blend-mode:lighten */
 }
 
 .project_tags span {
