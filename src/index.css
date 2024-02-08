@@ -25,6 +25,7 @@ li {
 
 a {
     text-decoration: none;
+    color: unset;
 }
 
 h2 {
@@ -107,7 +108,9 @@ nav {
     max-width: 1000px;
     width: 100%;
 }
-
+/* .container {
+    border: 1px solid red;
+} */
 nav .container {
     display: flex;
     align-items: center;
