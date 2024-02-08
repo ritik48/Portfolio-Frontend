@@ -1,0 +1,136 @@
+.blogs_section {
+    padding-block: 13rem;
+
+    background-image: url("../../public/images/bg.svg"),
+        linear-gradient(to bottom, #111111, var(--background-color));
+    background-size: cover;
+    background-position: center;
+}
+
+.blogs_section .container {
+    position: relative;
+    border-left: 1px solid grey !important;
+}
+
+.blogs_content {
+    margin-top: 20px;
+    display: flex;
+    gap: 5.5rem;
+
+
+    background-color: rgba(17, 17, 17, 0.694);
+
+    border-radius: 2.5rem;
+    padding: 3rem;
+
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.blog_left {
+    /* width: 60%; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+
+.blog_right img {
+    width: 280px;
+    height: 200px;
+    border-radius: 20px;
+    box-shadow: 0 0 8px grey;
+}
+
+.blog_title {
+    font-size: 2.5rem;
+    color: rgb(221, 221, 221);
+    font-weight: 500;
+}
+
+.blog_date {
+    color: rgb(167, 163, 163);
+    font-size: 1.6rem;
+}
+
+.blog_tags {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    position: relative;
+}
+
+.blog_tags span {
+    font-size: 1.4rem;
+    color: white;
+    border: 0.5px solid rgb(97, 97, 97);
+
+    background-color: rgb(43, 9, 22);
+
+    padding: 0.7em 0.9em;
+    border-radius: 0.8em;
+}
+.icon {
+    width: 20px !important;
+}
+
+.blog_read {
+    display: flex;
+    align-items: center;
+
+    gap: 0.8rem;
+
+}
+
+.blogs_section .btn.secondary {
+    display: flex;
+    gap: 0.8rem;
+
+    align-items: center;
+}
+
+.blogs_section .btn.btn.primary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    border-color: rgb(95, 90, 54) !important;
+
+    color: black;
+
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .blogs_content:nth-of-type(1) {
+        padding-top: 0;
+    }
+
+    .blogs_content {
+        flex-direction: column;
+
+        padding: unset;
+        padding-block: 3rem;
+
+        background-color: transparent;
+        
+        gap: 2.2rem;
+
+        border-radius: 0;
+
+        border: none;
+        border-bottom: 0.5px solid grey;
+    }
+
+    .blogs_content img {
+        width: 100%;
+    }
+
+    .blog_right {
+        order: 1;
+    }
+    .blog_left {
+        order: 2;
+    }
+}

@@ -1,7 +1,7 @@
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 export default function NavBar() {
     const { scrollY } = useScroll();
@@ -42,15 +42,15 @@ export default function NavBar() {
             >
                 <div className="container">
                     {showLogo && (
-                        <div className="logo">
-                            {"< "} R {"/>"}
-                        </div>
+                        <Link className="logo" to={"/"}>
+                             RR {""}
+                        </Link>
                     )}
                     <ul>
                         <NavLink to={"/projects"}>
                             <li>Projects</li>
                         </NavLink>
-                        <NavLink to={"/"}>
+                        <NavLink to={"/blogs"}>
                             <li>Blogs</li>
                         </NavLink>
 
