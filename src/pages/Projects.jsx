@@ -8,6 +8,16 @@ import { useState, useEffect } from "react";
 const BACKEND = "http://192.168.1.9:3001";
 // const BACKEND = "http://127.0.0.1:3001";
 
+const project_tags = [
+    "Python",
+    "Reactjs",
+    "Nodejs",
+    "Expressjs",
+    "EJS",
+    "MERN",
+    "Html/Css",
+];
+
 function ProjectList() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -16,6 +26,13 @@ function ProjectList() {
 
     const [search, setSearch] = useState("");
     const [searchProject, setSearchProject] = useState([]);
+    const [selectedProject, setSelectedProject] = useState([]);
+
+    const [selectedTopic, setSelectedTopic] = useState(null);
+
+    function handleSelectTopic(topic) {
+        setSelectedTopic((selected) => (selected !== topic ? topic : null));
+    }
 
     useEffect(() => {
         setError("");
@@ -42,6 +59,7 @@ function ProjectList() {
         fetchProjects();
     }, []);
 
+    // fecth project on search
     useEffect(() => {
         const controller = new AbortController();
         async function fetchProjects() {
@@ -61,8 +79,6 @@ function ProjectList() {
                 }
 
                 const data = await res.json();
-                console.log(search, " = ", data);
-                // console.log("data = ", data)
                 setSearchProject(data);
 
                 setError("");
@@ -70,7 +86,6 @@ function ProjectList() {
                 if (error.name !== "AbortError") {
                     setError(error.message);
                 }
-                
             } finally {
                 setLoading(false);
             }
@@ -81,6 +96,7 @@ function ProjectList() {
             return;
         }
 
+        setSelectedTopic(null);
         setSearchProject([]);
         fetchProjects();
 
@@ -88,6 +104,38 @@ function ProjectList() {
             controller.abort();
         };
     }, [search]);
+
+    // fetch project on tag
+
+    useEffect(() => {
+        async function fetchProjects() {
+            setError("");
+            setLoading(true);
+            try {
+                const res = await fetch(
+                    `${BACKEND}/projects/tags?tag=${selectedTopic}`
+                );
+
+                if (!res.ok) {
+                    return setError("Invalid response");
+                }
+
+                const data = await res.json();
+                setSelectedProject(data);
+
+                setError("");
+            } catch (err) {
+                setError("Something went wrong");
+            } finally {
+                setLoading(false);
+            }
+        }
+        if (selectedTopic == null) return;
+
+        setSearchProject([]);
+        setSelectedProject([]);
+        fetchProjects();
+    }, [selectedTopic]);
 
     return (
         <section className={styles.projects_section}>
@@ -103,13 +151,20 @@ function ProjectList() {
                             onChange={(e) => setSearch(e.target.value)}
                         />
                         <div className={styles.project_tags}>
-                            <span>Python</span>
-                            <span>React</span>
-                            <span>Nodejs</span>
-                            <span>Expressjs</span>
-                            <span>EJS</span>
-                            <span>MERN</span>
-                            <span>Html/Css</span>
+                            {project_tags.map((tag) => (
+                                <span
+                                    className={
+                                        selectedTopic !== null
+                                            ? selectedTopic === tag
+                                                ? styles.selected_tag
+                                                : ""
+                                            : ""
+                                    }
+                                    onClick={() => handleSelectTopic(tag)}
+                                >
+                                    {tag}
+                                </span>
+                            ))}
                         </div>
                     </div>
                     <div className={styles.project_list}>
@@ -121,9 +176,21 @@ function ProjectList() {
                             <p className="info">Currently no projects.</p>
                         )}
 
-                        {!loading && search && searchProject.length < 1 && (
-                            <p className="info">No project for this search</p>
-                        )}
+                        {!loading &&
+                            !error && !selectedTopic &&
+                            search &&
+                            searchProject.length < 1 && (
+                                <p className="info">
+                                    No project for this search
+                                </p>
+                            )}
+
+                        {!loading &&
+                            !error &&
+                            selectedTopic &&
+                            selectedProject.length < 1 && (
+                                <p className="info">No project for this Tag</p>
+                            )}
 
                         {search && searchProject.length > 0 && (
                             <>
@@ -141,7 +208,23 @@ function ProjectList() {
                             </>
                         )}
 
-                        {!search && (
+                        {selectedTopic && !loading && !error && (
+                            <>
+                                {selectedProject.map((project) => {
+                                    return (
+                                        <Project
+                                            title={project.title}
+                                            github={project.github}
+                                            live={project.live}
+                                            image={`${BACKEND}${project.image}`}
+                                            key={project.live}
+                                        />
+                                    );
+                                })}
+                            </>
+                        )}
+
+                        {!search && !selectedTopic && !loading && !error && (
                             <>
                                 {projects.map((project) => {
                                     return (

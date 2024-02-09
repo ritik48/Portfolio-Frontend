@@ -18,7 +18,6 @@
     display: flex;
     flex-direction: column;
 
-    
     gap: 3rem;
 
     justify-content: center;
@@ -69,11 +68,11 @@ input:focus-within {
     border-radius: 20px;
     background-color: rgb(112, 85, 21);
 
-    background: linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5) ), url("../../public/images/project_bg2.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)),
+        url("../../public/images/project_bg2.jpg");
     background-position: center;
     background-size: cover;
 
-    
     box-shadow: 0 0 5px rgb(109, 109, 109);
     /* background-blend-mode:lighten */
 }
@@ -87,11 +86,21 @@ input:focus-within {
     padding: 0.3em 0.6em;
     background-color: #120f0d;
     border-radius: 0.3em;
+
+    transition: 0.15s all ease-in;
+    cursor: pointer;
+}
+
+.project_tags .selected_tag {
+    background-color: rgb(109, 121, 13);
+    color: white;
 }
 
 .project_list {
     display: flex;
     flex-wrap: wrap;
+
+    min-height: 300px;
 
     gap: 5rem;
 }
@@ -105,5 +114,15 @@ input:focus-within {
         height: 40px;
 
         border: 2px solid red;
+    }
+    .project_list {
+        min-height: 150px;
+    }
+}
+
+@media (hover: hover) {
+    .project_tags span:hover {
+        background-color: rgb(109, 121, 13);
+        color: white;
     }
 }
