@@ -425,9 +425,12 @@ function LatestBlog() {
 }
 
 export default function Home() {
+    // change page title
+    useEffect(() => {
+        document.title = "Ritik Raj | Web Developer"
+    }, [])
     return (
         <>
-            {/* <NavBar /> */}
             <HeroSection />
             <Skills />
             <ProjectList />

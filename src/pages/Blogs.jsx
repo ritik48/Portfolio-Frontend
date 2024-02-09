@@ -100,6 +100,12 @@ function BlogList() {
         }
         fetchBlogs();
     }, []);
+
+    // change page title
+    useEffect(() => {
+        document.title = "Ritik Raj | Blogs"
+    }, [])
+
     return (
         <section className={styles.blogs_section}>
             <div className="container">

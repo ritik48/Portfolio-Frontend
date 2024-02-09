@@ -136,6 +136,11 @@ function ProjectList() {
         fetchProjects();
     }, [selectedTopic]);
 
+    // change page title
+    useEffect(() => {
+        document.title = "Ritik Raj | Projects";
+    }, []);
+
     return (
         <section className={styles.projects_section}>
             <div className="container">
@@ -176,7 +181,8 @@ function ProjectList() {
                         )}
 
                         {!loading &&
-                            !error && !selectedTopic &&
+                            !error &&
+                            !selectedTopic &&
                             search &&
                             searchProject.length < 1 && (
                                 <p className="info">
