@@ -5,8 +5,7 @@ import Socials from "../components/Socials";
 
 import { useState, useEffect } from "react";
 
-const BACKEND = "http://192.168.1.9:3001";
-// const BACKEND = "http://127.0.0.1:3001";
+const BACKEND = process.env.REACT_APP_BACKEND;
 
 const project_tags = [
     "Python",

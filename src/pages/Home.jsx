@@ -7,8 +7,7 @@ import Project from "../components/Project";
 import Blog from "../components/Blog";
 import Socials from "../components/Socials";
 
-const BACKEND = "http://192.168.1.9:3001";
-// const BACKEND = "http://127.0.0.1:3001";
+const BACKEND = process.env.REACT_APP_BACKEND;
 
 function HeroSection() {
     const comp = useRef(null);

@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import styles from "./Blogs.module.css";
 import Socials from "../components/Socials";
 
-const BACKEND = "http://192.168.1.9:3001";
-// const BACKEND = "http://127.0.0.1:3001";
+const BACKEND = process.env.REACT_APP_BACKEND;
 
 function Blog({ title, tags, createdAt, link, image }) {
     function getFormattedDate() {
