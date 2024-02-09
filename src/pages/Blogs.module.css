@@ -13,11 +13,11 @@
     border-radius: 20px;
     background-color: rgb(112, 85, 21);
 
-    background: linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5) ), url("../../public/images/project_bg.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)),
+        url("../../public/images/project_bg.jpg");
     background-position: center;
     background-size: cover;
 
-    
     box-shadow: 0 0 5px rgb(109, 109, 109);
 }
 
@@ -30,7 +30,6 @@
     margin-top: 20px;
     display: flex;
     gap: 5.5rem;
-
 
     background-color: rgba(17, 17, 17, 0.694);
 
@@ -47,7 +46,6 @@
     align-items: flex-start;
     gap: 1rem;
 }
-
 
 .blog_right img {
     width: 280px;
@@ -94,7 +92,6 @@
     align-items: center;
 
     gap: 0.8rem;
-
 }
 
 .blogs_section .btn.secondary {
@@ -116,6 +113,10 @@
     margin-top: 20px;
 }
 
+.info {
+    margin-top: 40px !important;
+}
+
 @media screen and (max-width: 600px) {
     .blogs_content:nth-of-type(1) {
         padding-top: 0;
@@ -128,7 +129,7 @@
         padding-block: 3rem;
 
         background-color: transparent;
-        
+
         gap: 2.2rem;
 
         border-radius: 0;

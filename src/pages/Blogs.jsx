@@ -105,10 +105,10 @@ function BlogList() {
             <div className="container">
                 <h2 className={styles.heading}>Blogs</h2>
 
-                {error && <p className="info error">{error}</p>}
-                {loading && <p className="info">Fetching Blogs...</p>}
+                {error && <p className={`info error ${styles.info}`}>{error}</p>}
+                {loading && <p className={`info ${styles.info}`}>Fetching Blogs...</p>}
                 {!loading && !error && !blogs && (
-                    <p className="info">Currently no blogs.</p>
+                    <p className={`info ${styles.info}`}>Currently no blogs.</p>
                 )}
 
                 {!loading && !error && blogs.length && (
