@@ -12,27 +12,35 @@ export default function Socials() {
                 <img src="/icons/t2.svg" className="svg_float" alt="" />
                 <img src="/icons/t3.svg" className="svg_float" alt="" />
                 <div className="social_container">
-                    <div>
+                    <a
+                        href="https://linkedin.com/in/raj-ritik"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
                         <img
                             className="social_icon"
                             src="/icons/linkedin.png"
                             alt=""
                         />
-                    </div>
-                    <div>
+                    </a>
+                    <a href="mailto:raj769417@gmail.com">
                         <img
                             className="social_icon"
                             src="/icons/gmail.png"
                             alt=""
                         />
-                    </div>
-                    <div>
+                    </a>
+                    <a
+                        href="https://github.com/ritik48"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
                         <img
                             className="social_icon"
                             src="/icons/github.svg"
                             alt=""
                         />
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>

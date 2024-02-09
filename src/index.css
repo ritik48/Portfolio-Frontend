@@ -640,14 +640,15 @@ section {
     position: relative;
 }
 
-.social_container div {
-    width: 10%;
+.social_container a {
+    /* width: 10%; */
     max-width: 180px;
 }
 
 .social_icon {
     display: block;
 
+    width: 8rem;
     padding: 2rem;
     border-radius: 1.8em;
     box-shadow: 0 0 5px rgb(126, 125, 125);
@@ -697,6 +698,9 @@ section {
         padding: 6rem 4rem;
         width: 100%;
     }
+    .skills_right {
+        padding-inline: 3.6rem;
+    }
 
     .projects {
         padding-top: 5rem;
@@ -719,6 +723,11 @@ section {
     }
     .more_blogs {
         margin-top: 25px;
+    }
+
+    .social_icon {
+        padding: 1rem;
+        width: 6rem;
     }
 }
 
