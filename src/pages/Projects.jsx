@@ -1,9 +1,9 @@
+import { useEffect, useReducer } from "react";
+
 import styles from "./Projects.module.css";
 
 import Project from "../components/Project";
 import Socials from "../components/Socials";
-
-import { useState, useEffect } from "react";
 
 const BACKEND = process.env.REACT_APP_BACKEND;
 
@@ -17,54 +17,91 @@ const project_tags = [
     "Html/Css",
 ];
 
-function ProjectList() {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+const initial_state = {
+    show_by: "all",
+    status: "loading",
+    projects: [],
+    selectedTopic: null,
+    search: "",
+    message: "fecthing your projects",
+};
 
-    const [projects, setProjects] = useState([]);
-
-    const [search, setSearch] = useState("");
-    const [searchProject, setSearchProject] = useState([]);
-    const [selectedProject, setSelectedProject] = useState([]);
-
-    const [selectedTopic, setSelectedTopic] = useState(null);
-
-    function handleSelectTopic(topic) {
-        setSelectedTopic((selected) => (selected !== topic ? topic : null));
+function reducer(state, action) {
+    switch (action.type) {
+        case "project/all":
+            return {
+                ...initial_state,
+            };
+        case "project/search":
+            if (action.payload.length < 1) {
+                return { ...initial_state, search: action.payload };
+            }
+            return {
+                ...initial_state,
+                show_by: "search",
+                search: action.payload,
+            };
+        case "project/topic":
+            return {
+                ...initial_state,
+                show_by: "topic",
+                selectedTopic:
+                    state.selectedTopic !== action.payload
+                        ? action.payload
+                        : null,
+            };
+        case "projectFetched":
+            return {
+                ...state,
+                status: "active",
+                projects: action.payload,
+                message: "",
+            };
+        case "projectFailed":
+            return {
+                ...state,
+                status: "error",
+                projects: [],
+                message: action.payload,
+            };
+        default:
+            throw new Error("Wrong action type");
     }
+}
+
+function ProjectList() {
+    const [
+        { status, message, projects, selectedTopic, search, show_by },
+        dispatch,
+    ] = useReducer(reducer, initial_state);
 
     useEffect(() => {
-        setError("");
-        setLoading(true);
         async function fetchProjects() {
+            console.log("data = ");
             try {
                 const res = await fetch(`${BACKEND}/projects`, {
                     method: "GET",
                 });
 
                 if (!res.ok) {
-                    return setError("Unable to fetch projects");
+                    throw new Error("Cannot fetch projects");
                 }
                 const data = await res.json();
 
-                setProjects(data);
-                setLoading(false);
+                dispatch({ type: "projectFetched", payload: data });
             } catch (error) {
-                setError("Unable to fetch projects");
-            } finally {
-                setLoading(false);
+                dispatch({ type: "projectFailed", payload: error.message });
             }
         }
+        if (show_by !== "all") return;
+
         fetchProjects();
-    }, []);
+    }, [show_by]);
 
     // fecth project on search
     useEffect(() => {
         const controller = new AbortController();
         async function fetchProjects() {
-            setError("");
-            setLoading(true);
-
             try {
                 const res = await fetch(
                     `${BACKEND}/projects/search?q=${search}`,
@@ -74,29 +111,21 @@ function ProjectList() {
                 );
 
                 if (!res.ok) {
-                    return setError("Something went wrong. Try again");
+                    throw new Error("Something went wrong. Try again");
                 }
-
                 const data = await res.json();
-                setSearchProject(data);
-
-                setError("");
+                dispatch({ type: "projectFetched", payload: data });
             } catch (error) {
                 if (error.name !== "AbortError") {
-                    setError(error.message);
+                    dispatch({ type: "projectFailed", payload: error.message });
                 }
-            } finally {
-                setLoading(false);
             }
         }
 
-        if (search.length < 2) {
-            setSearchProject([]);
+        if (search.length < 1) {
             return;
         }
 
-        setSelectedTopic(null);
-        setSearchProject([]);
         fetchProjects();
 
         return function () {
@@ -105,36 +134,36 @@ function ProjectList() {
     }, [search]);
 
     // fetch project on tag
-
     useEffect(() => {
         async function fetchProjects() {
-            setError("");
-            setLoading(true);
             try {
                 const res = await fetch(
                     `${BACKEND}/projects/tags?tag=${selectedTopic}`
                 );
 
                 if (!res.ok) {
-                    return setError("Invalid response");
+                    throw new Error("Invalid response");
                 }
 
                 const data = await res.json();
-                setSelectedProject(data);
 
-                setError("");
-            } catch (err) {
-                setError("Something went wrong");
-            } finally {
-                setLoading(false);
+                dispatch({ type: "projectFetched", payload: data });
+            } catch (error) {
+                dispatch({ type: "projectFailed", payload: error.message });
             }
         }
-        if (selectedTopic == null) return;
+        console.log("yes 1");
+        if (show_by !== "topic") {
+            return;
+        }
 
-        setSearchProject([]);
-        setSelectedProject([]);
+        if (selectedTopic == null && show_by === "topic") {
+            console.log("yes 2");
+            return dispatch({ type: "project/all" });
+        }
+
         fetchProjects();
-    }, [selectedTopic]);
+    }, [selectedTopic, show_by]);
 
     // change page title
     useEffect(() => {
@@ -152,84 +181,50 @@ function ProjectList() {
                         <input
                             placeholder="Seacrh"
                             value={search}
-                            onChange={(e) => setSearch(e.target.value)}
+                            onChange={(e) =>
+                                dispatch({
+                                    type: "project/search",
+                                    payload: e.target.value,
+                                })
+                            }
                         />
                         <div className={styles.project_tags}>
-                            {project_tags.map((tag) => (
-                                <span
-                                    className={
-                                        selectedTopic !== null
-                                            ? selectedTopic === tag
-                                                ? styles.selected_tag
+                            {project_tags.map((tag) => {
+                                return (
+                                    <span
+                                        className={
+                                            selectedTopic !== null
+                                                ? selectedTopic === tag
+                                                    ? styles.selected_tag
+                                                    : ""
                                                 : ""
-                                            : ""
-                                    }
-                                    onClick={() => handleSelectTopic(tag)}
-                                >
-                                    {tag}
-                                </span>
-                            ))}
+                                        }
+                                        onClick={() =>
+                                            dispatch({
+                                                type: "project/topic",
+                                                payload: tag,
+                                            })
+                                        }
+                                        key={Date.now() + Math.random() * 1000}
+                                    >
+                                        {tag}
+                                    </span>
+                                );
+                            })}
                         </div>
                     </div>
                     <div className={styles.project_list}>
-                        {error && <p className="info error">{error}4564...</p>}
-                        {loading && (
-                            <p className="info">Fetching projects...</p>
+                        {status === "error" && (
+                            <p className="info error">{message} 4564...</p>
                         )}
-                        {!loading && !error && projects.length < 1 && (
+                        {status === "loading" && (
+                            <p className="info">{message}</p>
+                        )}
+                        {status === "active" && projects.length < 1 && (
                             <p className="info">Currently no projects.</p>
                         )}
 
-                        {!loading &&
-                            !error &&
-                            !selectedTopic &&
-                            search &&
-                            searchProject.length < 1 && (
-                                <p className="info">
-                                    No project for this search
-                                </p>
-                            )}
-
-                        {!loading &&
-                            !error &&
-                            selectedTopic &&
-                            selectedProject.length < 1 && (
-                                <p className="info">No project for this Tag</p>
-                            )}
-
-                        {search && searchProject.length > 0 && (
-                            <>
-                                {searchProject.map((project) => {
-                                    return (
-                                        <Project
-                                            title={project.title}
-                                            github={project.github}
-                                            live={project.live}
-                                            image={`${BACKEND}${project.image}`}
-                                            key={project.live}
-                                        />
-                                    );
-                                })}
-                            </>
-                        )}
-
-                        {selectedTopic && !loading && !error && (
-                            <>
-                                {selectedProject.map((project) => {
-                                    return (
-                                        <Project
-                                            title={project.title}
-                                            github={project.github}
-                                            live={project.live}
-                                            image={`${BACKEND}${project.image}`}
-                                            key={project.live}
-                                        />
-                                    );
-                                })}
-                            </>
-                        )}
-
-                        {!search && !selectedTopic && !loading && !error && (
+                        {status === "active" && projects.length > 0 && (
                             <>
                                 {projects.map((project) => {
                                     return (
