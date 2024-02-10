@@ -1,5 +1,11 @@
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { useState } from "react";
+import {
+    motion,
+    useScroll,
+    useMotionValueEvent,
+    useInView,
+    useAnimation,
+} from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 import { NavLink, Link } from "react-router-dom";
 
@@ -9,6 +15,21 @@ export default function NavBar() {
 
     const [showLogo, setShowLogo] = useState(true);
 
+
+    // animate logo
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: false });
+    const animateLogo = useAnimation();
+
+    useEffect(() => {
+        if (isInView || showLogo) {
+            animateLogo.start("visible");
+        } else {
+            animateLogo.start("hidden");
+        }
+    }, [isInView, animateLogo, showLogo]);
+
+    // animate nav bar show and hide
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious();
 
@@ -27,7 +48,6 @@ export default function NavBar() {
 
     return (
         <>
-           
             <motion.nav
                 initial="initial"
                 variants={{
@@ -43,7 +63,17 @@ export default function NavBar() {
                 <div className="container">
                     {showLogo && (
                         <Link className="logo" to={"/"}>
-                             RR {""}
+                            <motion.div
+                                ref={ref}
+                                variants={{
+                                    hidden: { opacity: 0, x: "-40px" },
+                                    visible: { opacity: 1, x: 0 },
+                                }}
+                                initial="hidden"
+                                animate={animateLogo}
+                            >
+                                RR {""}
+                            </motion.div>
                         </Link>
                     )}
                     <ul>
