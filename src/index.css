@@ -39,9 +39,9 @@ h2 {
 .info {
     color: rgb(163, 157, 157);
     text-align: center !important;
-    
+
     font-size: 2.2rem;
-    
+
     margin: 0 auto;
 }
 
@@ -135,7 +135,7 @@ nav ul {
     width: fit-content;
     margin: 0 auto;
 
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     gap: 4rem;
 
     padding-block: 0.7em;
@@ -145,6 +145,10 @@ nav ul {
     border-radius: 10px;
 
     background-color: rgba(34, 33, 33, 0.932);
+}
+
+nav ul:has(.active) {
+    font-size: 1.4rem !important;
 }
 
 .active {
@@ -243,7 +247,6 @@ ul li {
 .hero_img {
     width: 300px;
 }
-
 
 .hero_content p {
     font-size: 1em;
@@ -349,7 +352,7 @@ ul li {
     align-items: center;
     width: 90px;
     height: 90px;
-    
+
     background-color: #1d1e1e;
     border-radius: 18px;
     padding: 20px;
@@ -454,7 +457,6 @@ img {
     padding-block: 10rem;
 }
 
-
 .blogs .container {
     position: relative;
     border-left: 1px solid grey;
@@ -482,7 +484,7 @@ img {
     top: 0;
     left: 5%;
 
-    width:100px;
+    width: 100px;
     height: 100px;
     background-color: rgb(200, 255, 127);
 
@@ -551,7 +553,6 @@ img {
     gap: 0.8rem;
 }
 
-
 .blogs .btn.btn.primary {
     display: flex;
     align-items: center;
@@ -560,11 +561,10 @@ img {
     border-color: rgb(95, 90, 54) !important;
 
     color: black;
-    
+
     margin-top: 20px;
     width: max-content;
 }
-
 
 /* =================== Socials =============== */
 section {
@@ -572,23 +572,21 @@ section {
 }
 
 .socials {
-    
     /* margin-bottom: 100px; */
     padding: 10rem 3rem;
     /* background-color: #1d1e1e8f; */
 
     border-top: 0.5px solid grey;
-    background-image:  url("../public/images/bg.svg"), linear-gradient(to bottom,#1d1e1e, var(--background-color));
+    background-image: url("../public/images/bg.svg"),
+        linear-gradient(to bottom, #1d1e1e, var(--background-color));
     border-radius: 50px;
-        /* margin-top: 50px; */
-        /* background:  no-repeat center center fixed; */
-        background-size: cover;
-        background-position: center;
-        /* margin-bottom: 50px; */
-  
+    /* margin-top: 50px; */
+    /* background:  no-repeat center center fixed; */
+    background-size: cover;
+    background-position: center;
+    /* margin-bottom: 50px; */
 
     position: relative;
-    
 }
 
 .socials .container::before {
@@ -596,13 +594,12 @@ section {
     position: absolute;
     top: -8%;
     left: 18%;
-    
+
     transform: rotate(-70deg);
-    
+
     opacity: 0.4;
     width: 20%;
 }
-
 
 .socials .container .svg_float:nth-of-type(1) {
     bottom: 1%;
@@ -676,7 +673,6 @@ section {
         margin-top: 110px;
         font-size: 2rem;
         padding-inline: 5rem;
-
     }
     .hero_top {
         flex-direction: column;
@@ -729,7 +725,7 @@ section {
 
 @media screen and (max-width: 500px) {
     .hero_content p {
-        font-size: 1.2em;
+        font-size: 1.05em;
         color: rgb(210, 206, 206);
         line-height: 1.5em;
     }
@@ -745,16 +741,15 @@ section {
     }
     .social_container div {
         width: 20%;
-        
     }
     .socials .container::before {
         content: url("../public/icons/t1.svg");
         position: absolute;
         top: 5%;
         left: 2%;
-        
+
         transform: rotate(-60deg);
-        
+
         opacity: 0.2;
         width: 16%;
     }
@@ -770,7 +765,7 @@ section {
         align-items: center;
         width: 60px !important;
         height: 60px !important;
-        
+
         background-color: #1d1e1e;
         border-radius: 18px;
         padding: 12px;
@@ -817,5 +812,4 @@ section {
         transform: translateY(-2px);
         opacity: 0.8;
     }
-    
 }

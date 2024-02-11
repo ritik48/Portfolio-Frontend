@@ -15,7 +15,6 @@ export default function NavBar() {
 
     const [showLogo, setShowLogo] = useState(true);
 
-
     // animate logo
     const ref = useRef(null);
     const isInView = useInView(ref, { once: false });
@@ -84,7 +83,9 @@ export default function NavBar() {
                             <li>Blogs</li>
                         </NavLink>
 
-                        <li>Contact</li>
+                        <NavLink to={"/contact"}>
+                            <li>Contact</li>
+                        </NavLink>
                     </ul>
                 </div>
             </motion.nav>
