@@ -135,7 +135,7 @@ nav ul {
     width: fit-content;
     margin: 0 auto;
 
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     gap: 4rem;
 
     padding-block: 0.7em;
@@ -144,7 +144,7 @@ nav ul {
 
     border-radius: 10px;
 
-    background-color: rgba(35, 35, 35, 0.932);
+    background-color: rgba(34, 33, 33, 0.932);
 }
 
 .active {
@@ -728,6 +728,11 @@ section {
 }
 
 @media screen and (max-width: 500px) {
+    .hero_content p {
+        font-size: 1.2em;
+        color: rgb(210, 206, 206);
+        line-height: 1.5em;
+    }
     .project_img {
         width: 320px;
         height: 200px;
