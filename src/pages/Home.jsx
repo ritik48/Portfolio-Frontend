@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Project from "../components/Project";
 import Blog from "../components/Blog";
 import Socials from "../components/Socials";
+import Ticker from "framer-motion-ticker";
 
 const BACKEND = process.env.REACT_APP_BACKEND;
 
@@ -207,6 +208,32 @@ function HeroSection() {
     );
 }
 
+const skills = [
+    { name: "HTML", icon: "/icons/html.png" },
+    { name: "CSS", icon: "/icons/css.png" },
+    { name: "Javascript", icon: "/icons/js.png" },
+    { name: "React", icon: "/icons/react.png" },
+    { name: "NodeJs", icon: "/icons/nodejs.png" },
+    { name: "MongoDb", icon: "/icons/mongodb.png" },
+    { name: "ExpressJS", icon: "/icons/react.png" }, // Assuming this is intentional
+    { name: "Python", icon: "/icons/python.png" },
+];
+
+function SkillsList({ duration }) {
+    return (
+        <div className="skills_list">
+            <Ticker duration={duration}>
+                {skills.map((skill, index) => (
+                    <div key={index} className="skill">
+                        <img src={skill.icon} alt="" className="skill_icon" />
+                        {/* <span>{skill.name}</span> */}
+                    </div>
+                ))}
+            </Ticker>
+        </div>
+    );
+}
+
 function Skills() {
     return (
         <section className="skills">
@@ -221,72 +248,8 @@ function Skills() {
                 </div>
 
                 <div className="skills_right">
-                    <div className="skills_list">
-                        <div className="skill">
-                            <img
-                                src="/icons/html.png"
-                                alt=""
-                                className="skill_icon"
-                            />
-                            <span>HTML</span>
-                        </div>
-                        <div className="skill">
-                            <img
-                                src="/icons/css.png"
-                                alt=""
-                                className="skill_icon"
-                            />
-                            <span>CSS</span>
-                        </div>
-                        <div className="skill">
-                            <img
-                                src="/icons/js.png"
-                                alt=""
-                                className="skill_icon"
-                            />
-                            <span>Javascript</span>
-                        </div>
-                        <div className="skill">
-                            <img
-                                src="/icons/react.png"
-                                alt=""
-                                className="skill_icon"
-                            />
-                            <span>React</span>
-                        </div>
-                        <div className="skill">
-                            <img
-                                src="/icons/nodejs.png"
-                                alt=""
-                                className="skill_icon"
-                            />
-                            <span>NodeJs</span>
-                        </div>
-                        <div className="skill">
-                            <img
-                                src="/icons/mongodb.png"
-                                alt=""
-                                className="skill_icon"
-                            />
-                            <span>MongoDb</span>
-                        </div>
-                        <div className="skill">
-                            <img
-                                src="/icons/react.png"
-                                alt=""
-                                className="skill_icon"
-                            />
-                            <span>ExpressJS</span>
-                        </div>
-                        <div className="skill">
-                            <img
-                                src="/icons/python.png"
-                                alt=""
-                                className="skill_icon"
-                            />
-                            <span>Python</span>
-                        </div>
-                    </div>
+                    <SkillsList duration={20} />
+                    {/* <SkillsList duration={10}/> */}
                 </div>
             </div>
         </section>
@@ -351,7 +314,11 @@ function ProjectList() {
                         })}
                     </div>
                     {!error && !loading && projects && (
-                        <Link className="btn primary" to={"/projects"} onClick={() => window.scrollTo(0, 0)}>
+                        <Link
+                            className="btn primary"
+                            to={"/projects"}
+                            onClick={() => window.scrollTo(0, 0)}
+                        >
                             More Projects
                         </Link>
                     )}
@@ -415,7 +382,11 @@ function LatestBlog() {
                     )}
                 </div>
                 {!error && !loading && blogs && (
-                    <Link className="btn primary more_blogs" to={"/blogs"} onClick={() => window.scrollTo(0, 0)}>
+                    <Link
+                        className="btn primary more_blogs"
+                        to={"/blogs"}
+                        onClick={() => window.scrollTo(0, 0)}
+                    >
                         More Blogs
                     </Link>
                 )}
@@ -427,8 +398,8 @@ function LatestBlog() {
 export default function Home() {
     // change page title
     useEffect(() => {
-        document.title = "Ritik Raj | Web Developer"
-    }, [])
+        document.title = "Ritik Raj | Web Developer";
+    }, []);
     return (
         <>
             <HeroSection />
