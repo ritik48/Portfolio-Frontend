@@ -4,9 +4,9 @@ export default function Socials() {
             <div className="container">
                 <h2>
                     <span className="highlight2">
-                        Have a project in mind ?{" "}
+                        I'm here,{" "}
                     </span>{" "}
-                    Let's talk.
+                    Let's connect.
                 </h2>
                 {/* <img src="/icons/t1.svg" className="test" alt="" /> */}
                 <img src="/icons/t2.svg" className="svg_float" alt="" />
