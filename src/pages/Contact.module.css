@@ -7,7 +7,12 @@
 
     padding-top: 12rem;
     /* margin-top: 10rem; */
+    background-image: url("../../public/images/bg.svg"),   linear-gradient(to bottom, #111111, var(--background-color));;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 }
+
 
 .title {
     color: rgb(17, 17, 17);
