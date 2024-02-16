@@ -4,6 +4,7 @@ import styles from "./Projects.module.css";
 
 import Project from "../components/Project";
 import Socials from "../components/Socials";
+import Loader from "../components/Loader";
 
 const BACKEND = process.env.REACT_APP_BACKEND;
 
@@ -23,7 +24,7 @@ const initial_state = {
     projects: [],
     selectedTopic: null,
     search: "",
-    message: "fecthing your projects",
+    message: "fecthing your projects...",
 };
 
 function reducer(state, action) {
@@ -218,7 +219,7 @@ function ProjectList() {
                             <p className="info error">{message} 4564...</p>
                         )}
                         {status === "loading" && (
-                            <p className="info">{message}</p>
+                            <Loader message={message}/>
                         )}
                         {status === "active" && projects.length < 1 && (
                             <p className="info">Currently no projects.</p>

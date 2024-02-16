@@ -2,11 +2,13 @@ import gsap from "gsap";
 
 import { useRef, useState, useLayoutEffect, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Ticker from "framer-motion-ticker";
 
 import Project from "../components/Project";
 import Blog from "../components/Blog";
 import Socials from "../components/Socials";
-import Ticker from "framer-motion-ticker";
+import Loader from "../components/Loader";
+
 
 const BACKEND = process.env.REACT_APP_BACKEND;
 
@@ -194,7 +196,7 @@ function HeroSection() {
                             </p>
                             <div className="hero_bottom">
                                 <button
-                                    className="btn secondary"
+                                    className="btn primary"
                                     onClick={downloadResume}
                                 >
                                     Download CV
@@ -295,7 +297,7 @@ function ProjectList() {
                     <div className="project_list">
                         {error && <p className="info error">{error}</p>}
                         {loading && (
-                            <p className="info">Fetching projects...</p>
+                            <Loader message={"Fetching projects..."} />
                         )}
                         {!loading && !error && projects.length < 1 && (
                             <p className="info">Currently no projects.</p>
@@ -366,7 +368,7 @@ function LatestBlog() {
 
                 <div className="blogs_content">
                     {error && <p className="info error">{error}</p>}
-                    {loading && <p className="info">Fetching Blogs...</p>}
+                    {loading && <Loader message={"Fetching Blogs..."} />}
                     {!loading && !error && !blogs && (
                         <p className="info">Currently no blogs.</p>
                     )}

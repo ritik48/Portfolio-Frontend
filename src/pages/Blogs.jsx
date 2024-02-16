@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
+import { useAnimation, useInView, motion } from "framer-motion";
 
 import styles from "./Blogs.module.css";
 import Socials from "../components/Socials";
-import { useAnimation, useInView, motion } from "framer-motion";
+import Loader from "../components/Loader";
 
 const BACKEND = process.env.REACT_APP_BACKEND;
 
@@ -139,7 +140,7 @@ function BlogList() {
                     <p className={`info error ${styles.info}`}>{error}</p>
                 )}
                 {loading && (
-                    <p className={`info ${styles.info}`}>Fetching Blogs...</p>
+                    <Loader message={"fetching blogs..."}/>
                 )}
                 {!loading && !error && !blogs && (
                     <p className={`info ${styles.info}`}>Currently no blogs.</p>

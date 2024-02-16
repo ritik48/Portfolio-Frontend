@@ -73,6 +73,7 @@ h2 {
 
 .btn.primary {
     background-color: var(--primary-color);
+    color: #1d1e1e;
 }
 
 .btn.secondary {
@@ -785,8 +786,8 @@ section {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--primary-color);
-    border-radius: 20px;
+    background-color: rgb(74, 74, 74);
+    border-radius: 5px;
     border: 6px solid transparent;
     background-clip: content-box;
 }
