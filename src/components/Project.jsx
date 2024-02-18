@@ -1,8 +1,9 @@
 import { useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-export default function Project({ github, live, title, image }) {
+export default function Project({ github, live, title, image, id }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: false });
 
@@ -32,7 +33,9 @@ export default function Project({ github, live, title, image }) {
                 <img src={`${image}`} alt="" />
             </div>
             <div className="project_detail">
-                <div className="project_title">{title}</div>
+                <Link to={"/projects/" + id}>
+                    <div className="project_title">{title}</div>
+                </Link>
                 <a href={live} target="_blank" rel="noreferrer">
                     <img src="/images/link.svg" alt="" />
                 </a>

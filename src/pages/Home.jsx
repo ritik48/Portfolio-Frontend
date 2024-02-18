@@ -54,22 +54,22 @@ function HeroSection() {
                         id="oooscillate-grad"
                     >
                         <stop
-                            stop-color="hsl(206, 75%, 49%)"
-                            stop-opacity="1"
+                            stopColor="hsl(206, 75%, 49%)"
+                            stopOpacity="1"
                             offset="0%"
                         ></stop>
                         <stop
-                            stop-color="hsl(331, 90%, 56%)"
-                            stop-opacity="1"
+                            stopColor="hsl(331, 90%, 56%)"
+                            stopOpacity="1"
                             offset="100%"
                         ></stop>
                     </linearGradient>
                 </defs>
                 <g
-                    stroke-width="2"
+                    strokeWidth="2"
                     stroke="url(#oooscillate-grad)"
                     fill="none"
-                    stroke-linecap="round"
+                    strokeLinecap="round"
                 >
                     <path
                         d="M 0 572 Q 355.5 -100 711 400 Q 1066.5 900 1422 572"
@@ -311,6 +311,7 @@ function ProjectList() {
                                     live={project.live}
                                     image={`${BACKEND}${project.image}`}
                                     key={project.live}
+                                    id={project._id}
                                 />
                             );
                         })}

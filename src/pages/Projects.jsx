@@ -218,9 +218,7 @@ function ProjectList() {
                         {status === "error" && (
                             <p className="info error">{message} 4564...</p>
                         )}
-                        {status === "loading" && (
-                            <Loader message={message}/>
-                        )}
+                        {status === "loading" && <Loader message={message} />}
                         {status === "active" && projects.length < 1 && (
                             <p className="info">Currently no projects.</p>
                         )}
@@ -235,6 +233,7 @@ function ProjectList() {
                                             live={project.live}
                                             image={`${BACKEND}${project.image}`}
                                             key={project.live}
+                                            id={project._id}
                                         />
                                     );
                                 })}
