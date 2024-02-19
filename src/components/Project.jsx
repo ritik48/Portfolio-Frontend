@@ -29,9 +29,9 @@ export default function Project({ github, live, title, image, id }) {
             animate={mainControl}
             transition={{ duration: 0.5, delay: 0 }}
         >
-            <div className="project_img">
+            <Link to={"/projects/" + id} className="project_img">
                 <img src={`${image}`} alt="" />
-            </div>
+            </Link>
             <div className="project_detail">
                 <Link to={"/projects/" + id}>
                     <div className="project_title">{title}</div>
