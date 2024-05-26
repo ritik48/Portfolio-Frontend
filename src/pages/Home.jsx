@@ -9,7 +9,6 @@ import Blog from "../components/Blog";
 import Socials from "../components/Socials";
 import Loader from "../components/Loader";
 
-
 const BACKEND = process.env.REACT_APP_BACKEND;
 
 function HeroSection() {
@@ -30,7 +29,7 @@ function HeroSection() {
 
     async function downloadResume() {
         const a = document.createElement("a");
-        a.setAttribute("href", `${BACKEND}/resume`);
+        a.setAttribute("href", `${BACKEND}/resume?type=FullStack`);
         a.click();
         a.remove();
     }
@@ -185,14 +184,10 @@ function HeroSection() {
                                     Ritik Raj
                                 </span>
                             </div>
-                            <p>
+                            <p className="hero-text">
                                 CSE undergrad and a{" "}
-                                <span className="highlight">
-                                    {" "}
-                                    🧑‍💻MERN Developer
-                                </span>
-                                .<br></br>Love to write code with every sip of
-                                🍵tea.
+                                <span className="highlight-bg">Full stack web developer</span>.
+                                <br></br>Driven by passion for coding
                             </p>
                             <div className="hero_bottom">
                                 <button
@@ -296,9 +291,7 @@ function ProjectList() {
                     <h2>Projects</h2>
                     <div className="project_list">
                         {error && <p className="info error">{error}</p>}
-                        {loading && (
-                            <Loader message={"Fetching projects..."} />
-                        )}
+                        {loading && <Loader message={"Fetching projects..."} />}
                         {!loading && !error && projects.length < 1 && (
                             <p className="info">Currently no projects.</p>
                         )}
