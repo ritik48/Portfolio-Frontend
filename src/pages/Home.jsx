@@ -186,7 +186,7 @@ function HeroSection() {
                             </div>
                             <p className="hero-text">
                                 CSE undergrad and a{" "}
-                                <span className="highlight-bg">Full stack web developer</span>.
+                                <span className="highlight-bg">Full stack web developer.</span>
                                 <br></br>Driven by passion for coding
                             </p>
                             <div className="hero_bottom">

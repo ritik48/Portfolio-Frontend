@@ -153,13 +153,12 @@ function ProjectList() {
                 dispatch({ type: "projectFailed", payload: error.message });
             }
         }
-        console.log("yes 1");
+
         if (show_by !== "topic") {
             return;
         }
 
         if (selectedTopic == null && show_by === "topic") {
-            console.log("yes 2");
             return dispatch({ type: "project/all" });
         }
 
