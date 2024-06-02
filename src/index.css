@@ -258,7 +258,7 @@ ul li {
         rgb(26, 93, 93),
         rgb(131, 112, 66)
     );
-    white-space:nowrap;
+    white-space: nowrap;
 }
 
 .hero-text {
@@ -541,9 +541,18 @@ img {
     margin-top: 1.5rem;
     margin-bottom: 1rem;
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     padding: 3.8rem 0 0 0;
     position: relative;
+}
+
+.blog_read a{
+    background-color: rgb(230, 230, 230) !important;
+
+    color: black !important;
+    padding: 8px 14px !important;
+
+    font-weight: 500;
 }
 
 .blog_tags::before {
@@ -559,13 +568,16 @@ img {
 .blog_tags span {
     font-size: 1.4rem;
     color: white;
-    border: 0.5px solid grey;
+    border: 0.5px solid rgb(31, 31, 31);
 
-    background-color: rgb(21, 21, 21);
+    background-color: rgb(8, 8, 8);
+
+    box-shadow: 0 0 5px 1px rgb(88, 88, 88);
 
     padding: 0.7em 0.9em;
     border-radius: 0.8em;
 }
+
 .blogs .btn.secondary {
     display: flex;
     gap: 0.8rem;

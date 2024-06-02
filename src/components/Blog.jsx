@@ -48,7 +48,7 @@ export default function Blog({ title, tags, createdAt, link, image }) {
                         rel="noreferrer"
                     >
                         Read{" "}
-                        <img src="/images/link.svg" alt="" className="icon" />
+                        <img src="/images/link_black.svg" alt="" className="icon" />
                     </a>
                 </div>
             </div>

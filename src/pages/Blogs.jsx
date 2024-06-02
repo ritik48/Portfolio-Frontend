@@ -82,7 +82,7 @@ function Blog({ title, tags, createdAt, link, image }) {
                         Read{" "}
                     </a>
                     <img
-                        src="/images/link.svg"
+                        src="/images/link_black.svg"
                         alt=""
                         className={styles.icon}
                     />

@@ -31,6 +31,8 @@
     display: flex;
     gap: 5.5rem;
 
+    justify-content: space-between;
+
     background-color: rgba(17, 17, 17, 0.694);
 
     border-radius: 2.5rem;
@@ -50,6 +52,7 @@
 .blog_right img {
     width: 280px;
     height: 200px;
+    object-fit: cover !important;
     border-radius: 20px;
     box-shadow: 0 0 8px grey;
 }
@@ -69,16 +72,18 @@
     margin-top: 1.5rem;
     margin-bottom: 1rem;
     display: flex;
-    gap: 1rem;
+    gap: 1.8rem;
     position: relative;
 }
 
 .blog_tags span {
     font-size: 1.4rem;
     color: white;
-    border: 0.5px solid rgb(97, 97, 97);
+    border: 0.5px solid rgb(31, 31, 31);
 
-    background-color: rgb(43, 9, 22);
+    background-color: rgb(8, 8, 8);
+
+    box-shadow: 0 0 5px 1px rgb(88, 88, 88);
 
     padding: 0.7em 0.9em;
     border-radius: 0.8em;
@@ -90,6 +95,13 @@
 .blog_read {
     display: flex;
     align-items: center;
+    background-color: rgb(230, 230, 230) !important;
+
+    color: black !important;
+    padding: 8px 14px !important;
+
+    font-weight: 500;
+    
 
     gap: 0.8rem;
 }
