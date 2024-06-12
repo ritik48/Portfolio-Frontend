@@ -58,6 +58,7 @@ export default function NavBar() {
                 }}
                 animate={hidden ? "hidden" : "visible"}
                 transition={{ duration: 0.35, ease: "easeInOut" }}
+                className={`${!showLogo && "nav-bg"}`}
             >
                 <div className="container">
                     {showLogo && (
