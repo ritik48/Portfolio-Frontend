@@ -36,7 +36,7 @@ function HeroSection() {
 
     return (
         <>
-            <svg
+            {/* <svg
                 className="svg1"
                 xmlns="http://www.w3.org/2000/svg"
                 version="1.1"
@@ -171,7 +171,7 @@ function HeroSection() {
                         opacity="0.09"
                     ></path>
                 </g>
-            </svg>
+            </svg> */}
             <section className="hero" ref={comp}>
                 <div className="container">
                     <div className="hero_content">
@@ -185,13 +185,12 @@ function HeroSection() {
                                 </span>
                             </div>
                             <p className="hero-text">
-                                CSE undergrad and a{" "}
-                                <span className="highlight-bg">Full stack web developer.</span>
-                                <br></br>Driven by passion for coding
+                                <span>Full Stack Web Developer ✨</span>
+                           
                             </p>
                             <div className="hero_bottom">
                                 <button
-                                    className="btn primary"
+                                    className="btn primary resume"
                                     onClick={downloadResume}
                                 >
                                     Download CV
