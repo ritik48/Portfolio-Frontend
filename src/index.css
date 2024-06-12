@@ -227,6 +227,21 @@ ul li {
 
 .btn.resume {
     border-radius: 30px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 0.7em 1.1em !important;
+}
+
+.btn.resume span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn.resume span > * {
+    transition: all 0.3s ease-in-out;
+    transform: rotateZ(-30deg);
 }
 
 .hero_left {
@@ -900,6 +915,19 @@ section {
     .btn.primary:hover {
         transform: translateY(-2px);
         opacity: 0.8;
+    }
+    .btn.resume {
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn.resume:hover {
+        gap: 15px;
+    }
+
+    .btn.resume:hover span > * {
+        scale: 1.5;
+        transform: rotateZ(0deg);
+        /* width: 30px; */
     }
 
     .btn.secondary:hover {
