@@ -58,7 +58,7 @@ function HeroSection() {
                                     className="btn primary resume"
                                     onClick={downloadResume}
                                 >
-                                    Download
+                                    Resume
                                     <span>
                                         <IoIosArrowRoundForward size={22} />
                                     </span>
