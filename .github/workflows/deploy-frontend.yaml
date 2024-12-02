@@ -38,7 +38,10 @@ jobs:
           git pull origin deployment
           npm install
 
-          npm run build
+          echo "REACT_APP_BACKEND is: $REACT_APP_BACKEND"
+          echo "EC2 USER is: $EC2_USER"
+
+          REACT_APP_BACKEND=${REACT_APP_BACKEND} npm run build
   
           sudo cp -r build/* /var/www/frontend
 
