@@ -25,7 +25,7 @@ jobs:
         echo "${EC2_KEY}" > ec2-key.pem
         chmod 600 ec2-key.pem
 
-        ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << EOF
+        ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
 
           export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
           echo "REACT BACKEND URL: $REACT_APP_BACKEND"
