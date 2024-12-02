@@ -39,7 +39,7 @@ jobs:
   
           git pull origin deployment
           npm install
-          npm run build
+          npm run build -- --verbose
   
           sudo cp -r build/* /var/www/frontend
 
