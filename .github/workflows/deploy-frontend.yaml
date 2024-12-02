@@ -27,6 +27,9 @@ jobs:
 
         ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
 
+          export EC2_HOST="${EC2_HOST}"
+          echo "Connected to EC2 Host: $EC2_HOST"
+
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           
@@ -37,8 +40,6 @@ jobs:
   
           git pull origin deployment
           npm install
-
-          env | grep REACT_APP_
 
           npm run build
   
