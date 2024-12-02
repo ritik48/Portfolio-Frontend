@@ -263,6 +263,9 @@ export default function Home() {
     useEffect(() => {
         document.title = "Ritik Raj | Web Developer";
     }, []);
+
+    console.log("=================== HOME ROUTE ====================");
+
     return (
         <>
             <HeroSection />
