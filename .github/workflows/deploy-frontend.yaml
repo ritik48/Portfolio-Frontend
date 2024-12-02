@@ -41,7 +41,7 @@ jobs:
 
           # Print specific REACT_APP variables
           echo "REACT_APP variables:"
-          env | grep REACT_APP_
+          env | grep REACT_APP_BACKEND
 
           # Explicitly set the variable
           export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
@@ -51,7 +51,7 @@ jobs:
 
           # Print environment variables again before build
           echo "Environment before build:"
-          env | grep REACT_APP_
+          env | grep REACT_APP_BACKEND
 
           npm run build
   
