@@ -197,6 +197,8 @@ function LatestBlog() {
 
     const [blogs, setBlogs] = useState(null);
 
+    console.log({ BACKEND_URL: BACKEND });
+
     useEffect(() => {
         setError("");
         setLoading(true);
