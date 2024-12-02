@@ -33,6 +33,8 @@ jobs:
           nvm use 20.17.0
 
           cd /home/ubuntu/Portfolio/Portfolio-Frontend
+
+          source ~/.bashrc
   
           git pull origin deployment
           npm install
