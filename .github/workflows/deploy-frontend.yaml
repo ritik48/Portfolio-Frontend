@@ -26,6 +26,12 @@ jobs:
 
         ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
 
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          
+          # Ensure the correct Node version is used
+          nvm use 20.17.0
+
           cd /home/ubuntu/Portfolio/Portfolio-Frontend
   
           git pull origin deployment
