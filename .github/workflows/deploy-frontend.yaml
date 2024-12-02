@@ -35,11 +35,25 @@ jobs:
 
           cd /home/ubuntu/Portfolio/Portfolio-Frontend
 
+         # Print all environment variables
+          echo "All environment variables:"
+          env
+
+          # Print specific REACT_APP variables
+          echo "REACT_APP variables:"
+          env | grep REACT_APP_
+
+          # Explicitly set the variable
           export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
   
           git pull origin deployment
           npm install
-          npm run build -- --verbose
+
+          # Print environment variables again before build
+          echo "Environment before build:"
+          env | grep REACT_APP_
+
+          npm run build
   
           sudo cp -r build/* /var/www/frontend
 
