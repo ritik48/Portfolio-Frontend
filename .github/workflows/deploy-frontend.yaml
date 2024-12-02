@@ -20,40 +20,29 @@ jobs:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
         EC2_KEY: ${{ secrets.EC2_KEY }}
-        REACT_APP_BACKEND: ${{ secrets.BACKEND_URL }}
       run: |
         echo "${EC2_KEY}" > ec2-key.pem
         chmod 600 ec2-key.pem
 
-        ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << EOF
+        ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
 
-          # Export the EC2_HOST and REACT_APP_BACKEND variables
-          export EC2_HOST="${EC2_HOST}"
-          echo "Connected to EC2 Host: $EC2_HOST"
-          
-          export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
+          source ~/.bashrc
+
           echo "Environment variable REACT_APP_BACKEND: $REACT_APP_BACKEND"
 
-          # Ensure nvm is sourced in the current session
           export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || { echo "nvm not installed"; exit 1; }
-
-          # Now use nvm to select the correct Node version
-          nvm use 20.17.0 || { echo "nvm use failed"; exit 1; }
-
-          # Verify that npm is available
-          npm --version || { echo "npm not found"; exit 1; }
-
-          # Navigate to the project directory
-          cd /home/ubuntu/Portfolio/Portfolio-Frontend || { echo "Directory not found"; exit 1; }
-
-          # Pull the latest changes and install dependencies
-          git pull origin deployment || { echo "Git pull failed"; exit 1; }
-          npm install || { echo "npm install failed"; exit 1; }
-
-          # Build the project with the REACT_APP_BACKEND environment variable
-          REACT_APP_BACKEND="${REACT_APP_BACKEND}" npm run build || { echo "Build failed"; exit 1; }
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           
+          # Ensure the correct Node version is used
+          nvm use 20.17.0
+
+          cd /home/ubuntu/Portfolio/Portfolio-Frontend
+  
+          git pull origin deployment
+          npm install
+
+          npm run build
+  
           sudo cp -r build/* /var/www/frontend
 
         EOF
