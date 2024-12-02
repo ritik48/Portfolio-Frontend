@@ -44,7 +44,7 @@ jobs:
           git pull origin deployment
           npm install
 
-          npm run build
+          REACT_APP_BACKEND="${REACT_APP_BACKEND}" npm run build
   
           sudo cp -r build/* /var/www/frontend
 
