@@ -30,6 +30,9 @@ jobs:
           export EC2_HOST="${EC2_HOST}"
           echo "Connected to EC2 Host: $EC2_HOST"
 
+          export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
+          echo "REACT BACKEND URL: $REACT_APP_BACKEND"
+
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           
