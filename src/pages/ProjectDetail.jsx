@@ -30,7 +30,7 @@ export default function ProjectDetail() {
                     <>
                         <div className={styles.project_top}>
                             <img
-                                src={BACKEND + project.image}
+                                src={`${BACKEND}/images/${project.image}`}
                                 alt="project-img"
                             />
                         </div>
