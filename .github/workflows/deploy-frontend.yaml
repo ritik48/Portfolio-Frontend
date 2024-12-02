@@ -27,22 +27,33 @@ jobs:
 
         ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
 
-          export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
-          echo "REACT BACKEND URL: $REACT_APP_BACKEND"
-
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          # Export the EC2_HOST and REACT_APP_BACKEND variables
+          export EC2_HOST="${EC2_HOST}"
+          echo "Connected to EC2 Host: $EC2_HOST"
           
-          # Ensure the correct Node version is used
-          nvm use 20.17.0
+          export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
+          echo "Environment variable REACT_APP_BACKEND: $REACT_APP_BACKEND"
 
-          cd /home/ubuntu/Portfolio/Portfolio-Frontend
-  
-          git pull origin deployment
-          npm install
+          # Ensure nvm is sourced in the current session
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || { echo "nvm not installed"; exit 1; }
 
-          REACT_APP_BACKEND="${REACT_APP_BACKEND}" npm run build
-  
+          # Now use nvm to select the correct Node version
+          nvm use 20.17.0 || { echo "nvm use failed"; exit 1; }
+
+          # Verify that npm is available
+          npm --version || { echo "npm not found"; exit 1; }
+
+          # Navigate to the project directory
+          cd /home/ubuntu/Portfolio/Portfolio-Frontend || { echo "Directory not found"; exit 1; }
+
+          # Pull the latest changes and install dependencies
+          git pull origin deployment || { echo "Git pull failed"; exit 1; }
+          npm install || { echo "npm install failed"; exit 1; }
+
+          # Build the project with the REACT_APP_BACKEND environment variable
+          REACT_APP_BACKEND="${REACT_APP_BACKEND}" npm run build || { echo "Build failed"; exit 1; }
+          
           sudo cp -r build/* /var/www/frontend
 
         EOF
