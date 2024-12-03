@@ -1,74 +1,118 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+# name: Deploy Frontend to EC2
+
+# on:
+#   push:
+#     branches: [ "deployment" ]
+
+# jobs:
+#   deploy:
+
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v3
+
+#     - name: Deploy to EC2
+#       env:
+#         EC2_HOST: ${{ secrets.EC2_HOST }}
+#         EC2_USER: ${{ secrets.EC2_USER }}
+#         EC2_KEY: ${{ secrets.EC2_KEY }}
+#         REACT_APP_BACKEND: ${{ secrets.BACKEND_URL }}
+#       run: |
+#         echo "${EC2_KEY}" > ec2-key.pem
+#         chmod 600 ec2-key.pem
+
+#         ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
+
+#           export NVM_DIR="$HOME/.nvm"
+#           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          
+#           # Ensure the correct Node version is used
+#           nvm use 20.17.0
+
+#           cd /home/ubuntu/Portfolio/Portfolio-Frontend
+  
+#           git pull origin deployment
+#           npm install
+
+#           npm run build
+  
+#           sudo cp -r build/* /var/www/frontend
+
+#         EOF
+        
+#         rm ec2-key.pem
+
 name: Deploy Frontend to EC2
 
 on:
-  push:
-    branches: [ "deployment" ]
+ push:
+ branches: [ "deployment" ]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+ deploy:
+ runs-on: ubuntu-latest
+ steps:
+ - name: Checkout code
+ uses: actions/checkout@v3
 
-    - name: Deploy to EC2
-      env:
-        EC2_HOST: ${{ secrets.EC2_HOST }}
-        EC2_USER: ${{ secrets.EC2_USER }}
-        EC2_KEY: ${{ secrets.EC2_KEY }}
-        REACT_APP_BACKEND: ${{ secrets.BACKEND_URL }}
-      run: |
-        echo "${EC2_KEY}" > ec2-key.pem
-        chmod 600 ec2-key.pem
+ - name: Write environment variables to a file
+ run: echo "REACT_APP_BACKEND=${{ secrets.BACKEND_URL }}" > env-vars.sh
 
-        # Debugging: print out SSH connection details
-        echo "Connecting to $EC2_USER@$EC2_HOST"
+ - name: Deploy to EC2
+ env:
+ EC2_HOST: ${{ secrets.EC2_HOST }}
+ EC2_USER: ${{ secrets.EC2_USER }}
+ EC2_KEY: ${{ secrets.EC2_KEY }}
+ run: |
+ # Create the SSH key file
+ echo "${EC2_KEY}" > ec2-key.pem
+ chmod 600 ec2-key.pem
 
-        # Use multiple SSH commands with explicit error handling
-        ssh -v -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOSSH'
-          # Print current working directory and user
-          pwd
-          whoami
+ # Transfer environment variables file to EC2
+ scp -i ec2-key.pem env-vars.sh $EC2_USER@$EC2_HOST:/tmp/env-vars.sh
 
-          # Explicitly set and verify environment variable
-          export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
-          echo "Backend URL: $REACT_APP_BACKEND"
+ # SSH into the EC2 instance and execute deployment commands
+ ssh -v -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOSSH'
+ # Source the environment variables
+ source /tmp/env-vars.sh
 
-          # Verify NVM and Node setup
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          
-          nvm --version
-          node --version
-          npm --version
+ # Print debugging info
+ echo "Backend URL: $REACT_APP_BACKEND"
+ pwd
+ whoami
 
-          # Navigate to project directory
-          cd /home/ubuntu/Portfolio/Portfolio-Frontend || { echo "Failed to change directory"; exit 1; }
-  
-          # Create .env file
-          echo "REACT_APP_BACKEND=$REACT_APP_BACKEND" > .env
-          cat .env
+ # Ensure Node and NVM are set up
+ export NVM_DIR="$HOME/.nvm"
+ [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+ nvm --version
+ node --version
+ npm --version
 
-          # Pull latest code
-          git pull origin deployment || { echo "Git pull failed"; exit 1; }
+ # Navigate to the project directory
+ cd /home/ubuntu/Portfolio/Portfolio-Frontend || { echo "Failed to change directory"; exit 1; }
 
-          # Install dependencies
-          npm install || { echo "npm install failed"; exit 1; }
+ # Create or update the .env file
+ echo "REACT_APP_BACKEND=$REACT_APP_BACKEND" > .env
+ cat .env
 
-          # Build the project
-          REACT_APP_BACKEND="$REACT_APP_BACKEND" npm run build || { echo "Build failed"; exit 1; }
-  
-          # Copy build files
-          sudo cp -r build/* /var/www/frontend || { echo "Copy to nginx directory failed"; exit 1; }
+ # Pull the latest changes from the deployment branch
+ git pull origin deployment || { echo "Git pull failed"; exit 1; }
 
-          echo "Deployment completed successfully"
-EOSSH
+ # Install dependencies
+ npm install || { echo "npm install failed"; exit 1; }
 
-        # Check the exit status of the SSH command
-        SSH_EXIT_STATUS=$?
-        if [ $SSH_EXIT_STATUS -ne 0 ]; then
-          echo "SSH command failed with exit status $SSH_EXIT_STATUS"
-          exit 1
-        fi
+ # Build the frontend project
+ REACT_APP_BACKEND=$REACT_APP_BACKEND npm run build || { echo "Build failed"; exit 1; }
 
-        rm ec2-key.pem
+ # Deploy build files to the Nginx directory
+ sudo cp -r build/* /var/www/frontend || { echo "Copy to Nginx directory failed"; exit 1; }
+
+ echo "Deployment completed successfully"
+ EOSSH
+
+ # Clean up temporary files
+ rm ec2-key.pem env-vars.sh
