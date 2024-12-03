@@ -266,7 +266,7 @@ export default function Home() {
         document.title = "Ritik Raj | Web Developer";
     }, []);
 
-    console.log("=================== HOME ROUTE 9 ====================");
+    console.log("=================== HOME ROUTE 0 ====================");
 
     return (
         <>
