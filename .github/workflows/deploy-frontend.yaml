@@ -24,24 +24,23 @@ jobs:
       run: |
         echo "${EC2_KEY}" > ec2-key.pem
         chmod 600 ec2-key.pem
-
         ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
-
+          # export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           
           # Ensure the correct Node version is used
           nvm use 20.17.0
-
           cd /home/ubuntu/Portfolio/Portfolio-Frontend
+          echo "REACT_APP_BACKEND=${REACT_APP_BACKEND}" > .env
   
           git pull origin deployment
           npm install
 
           npm run build
-  
+
           sudo cp -r build/* /var/www/frontend
 
         EOF
-        
+
         rm ec2-key.pem
