@@ -69,7 +69,7 @@ jobs:
           echo "${EC2_KEY}" > ec2-key.pem
           chmod 600 ec2-key.pem
 
-          mkdir -p ~/.shh
+          mkdir -p ~/.ssh
 
           # Configure SSH to skip host key verification
           echo -e "Host ${EC2_HOST}\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
