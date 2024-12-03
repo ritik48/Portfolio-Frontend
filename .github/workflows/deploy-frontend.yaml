@@ -20,11 +20,14 @@ jobs:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
         EC2_KEY: ${{ secrets.EC2_KEY }}
+        REACT_APP_BACKEND: ${{ secrets.BACKEND_URL }}
       run: |
         echo "${EC2_KEY}" > ec2-key.pem
         chmod 600 ec2-key.pem
 
         ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
+
+          export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
 
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
