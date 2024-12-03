@@ -27,7 +27,7 @@ jobs:
 
         ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
 
-          # export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
+          export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
 
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
