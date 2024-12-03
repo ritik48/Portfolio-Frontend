@@ -21,29 +21,54 @@ jobs:
         echo "${EC2_KEY}" > ec2-key.pem
         chmod 600 ec2-key.pem
 
-        # Pass the environment variable explicitly during SSH
-        ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST \
-        REACT_APP_BACKEND="$REACT_APP_BACKEND" << 'EOF'
+        # Debugging: print out SSH connection details
+        echo "Connecting to $EC2_USER@$EC2_HOST"
+
+        # Use multiple SSH commands with explicit error handling
+        ssh -v -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOSSH'
+          # Print current working directory and user
+          pwd
+          whoami
+
+          # Explicitly set and verify environment variable
+          export REACT_APP_BACKEND="${REACT_APP_BACKEND}"
+          echo "Backend URL: $REACT_APP_BACKEND"
+
+          # Verify NVM and Node setup
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           
-          nvm use 20.17.0
-          cd /home/ubuntu/Portfolio/Portfolio-Frontend
+          nvm --version
+          node --version
+          npm --version
+
+          # Navigate to project directory
+          cd /home/ubuntu/Portfolio/Portfolio-Frontend || { echo "Failed to change directory"; exit 1; }
   
-          # Create .env file with the passed environment variable
-          echo "REACT_APP_BACKEND=${REACT_APP_BACKEND}" > .env
-          
-          # Verify .env file contents
+          # Create .env file
+          echo "REACT_APP_BACKEND=$REACT_APP_BACKEND" > .env
           cat .env
-  
-          git pull origin deployment
-          npm install
 
-          # Build with the environment variable
-          REACT_APP_BACKEND="${REACT_APP_BACKEND}" npm run build
-  
-          sudo cp -r build/* /var/www/frontend
+          # Pull latest code
+          git pull origin deployment || { echo "Git pull failed"; exit 1; }
 
-        EOF
-        
+          # Install dependencies
+          npm install || { echo "npm install failed"; exit 1; }
+
+          # Build the project
+          REACT_APP_BACKEND="$REACT_APP_BACKEND" npm run build || { echo "Build failed"; exit 1; }
+  
+          # Copy build files
+          sudo cp -r build/* /var/www/frontend || { echo "Copy to nginx directory failed"; exit 1; }
+
+          echo "Deployment completed successfully"
+EOSSH
+
+        # Check the exit status of the SSH command
+        SSH_EXIT_STATUS=$?
+        if [ $SSH_EXIT_STATUS -ne 0 ]; then
+          echo "SSH command failed with exit status $SSH_EXIT_STATUS"
+          exit 1
+        fi
+
         rm ec2-key.pem
