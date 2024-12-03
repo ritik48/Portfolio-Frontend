@@ -11,14 +11,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Debug Environment Variables
-      env:
-        REACT_APP_BACKEND: ${{ secrets.BACKEND_URL }}
-      run: |
-        echo "Backend URL from secret: $REACT_APP_BACKEND"
-        # Verify the length and content of the variable
-        echo "Length of Backend URL: ${#REACT_APP_BACKEND}"
-
     - name: Deploy to EC2
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
@@ -29,31 +21,26 @@ jobs:
         echo "${EC2_KEY}" > ec2-key.pem
         chmod 600 ec2-key.pem
 
-        ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
+        # Pass the environment variable explicitly during SSH
+        ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST \
+        REACT_APP_BACKEND="$REACT_APP_BACKEND" << 'EOF'
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           
           nvm use 20.17.0
           cd /home/ubuntu/Portfolio/Portfolio-Frontend
   
-          # Extensive debugging
-          echo "Current environment:"
-          env
-          
-          # Create .env file with verbose output
+          # Create .env file with the passed environment variable
           echo "REACT_APP_BACKEND=${REACT_APP_BACKEND}" > .env
           
-          echo "Contents of .env file:"
+          # Verify .env file contents
           cat .env
-          
-          echo "Environment variables starting with REACT_APP:"
-          env | grep REACT_APP
   
           git pull origin deployment
           npm install
 
-          # Build with verbose environment logging
-          NODE_OPTIONS=--max_old_space_size=4096 npm run build
+          # Build with the environment variable
+          REACT_APP_BACKEND="${REACT_APP_BACKEND}" npm run build
   
           sudo cp -r build/* /var/www/frontend
 
