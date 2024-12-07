@@ -197,8 +197,6 @@ function LatestBlog() {
 
     const [blogs, setBlogs] = useState(null);
 
-    console.log({ BACKEND_URL: BACKEND });
-
     useEffect(() => {
         setError("");
         setLoading(true);
@@ -212,7 +210,7 @@ function LatestBlog() {
                     return setError("Unable to fetch blogs");
                 }
                 const data = await res.json();
-                console.log(data.tags);
+
                 setBlogs(data);
                 setLoading(false);
             } catch (error) {
@@ -265,8 +263,6 @@ export default function Home() {
     useEffect(() => {
         document.title = "Ritik Raj | Web Developer";
     }, []);
-
-    console.log("=================== HOME ROUTE 1 ====================");
 
     return (
         <>
