@@ -2,7 +2,7 @@ name: Deploy Frontend to EC2
 
 on:
   push:
-    branches: [ "deployment" ]
+    branches: ["main"]
 
 jobs:
   deploy:
