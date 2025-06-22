@@ -178,7 +178,7 @@ nav ul:has(.active) {
 .active {
   background-color: rgb(35, 35, 35);
   color: rgb(215, 212, 212);
-  padding: 0.5rem 0.9rem;
+  padding: 0.5rem 0.9rem !important;
   border-radius: 0.5rem;
 }
 
@@ -790,7 +790,6 @@ section {
     gap: 6rem;
   }
 
-
   .skills_right {
     width: 100%;
     display: flex;
@@ -798,7 +797,6 @@ section {
 
     position: relative;
   }
-
 
   .skills_list {
     display: flex;
