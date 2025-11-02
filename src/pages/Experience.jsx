@@ -3,6 +3,29 @@ import "./Experience.css";
 
 const experiences = [
   {
+    company: "Statfinity",
+    logo: "/statfinity.jpeg",
+    location: "Remote",
+    role: "Full Stack Developer",
+    duration: "July 2025 - Present",
+    responsibilities: [
+      "Designed and developed a pixel-perfect frontend for Unite, an ETL platform, using Next.js, TypeScript,Tailwind CSS, and Figma, enabling seamless user interaction and scalability.",
+      " Implemented robust user authentication with email/password login and 2FA support, enhancing platform security and access control.",
+      "Engineered backend services using Node.js and Express, integrating multiple third-party data sources to facilitate reliable and dynamic data transfers within the ETL workflow.",
+    ],
+    link: "https://www.linkedin.com/company/statfinity",
+    skills: [
+      "Next.js",
+      "TypeScript",
+      "Express",
+      "Redux",
+      "Docker",
+      "ETL",
+      "EC2",
+      "S3",
+    ],
+  },
+  {
     company: "Autonmis",
     logo: "/autonmis.jpeg", // Replace with actual logo if available
     location: "Remote",
