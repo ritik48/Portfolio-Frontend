@@ -225,7 +225,7 @@ function ProjectList() {
                       title={project.title}
                       github={project.github}
                       live={project.live}
-                      image={`${BACKEND}/${project.image}`}
+                      image={`${BACKEND}/images${project.image}`}
                       key={project.live}
                       id={project._id}
                     />
